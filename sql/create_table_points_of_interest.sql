@@ -1,4 +1,3 @@
-
 CREATE TABLE points_of_interest (
     id int (11) NOT NULL UNIQUE PRIMARY KEY,
     user_id int (11) NOT NULL,
