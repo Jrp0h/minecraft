@@ -5,7 +5,7 @@
 Efter clone kör:
 
 ```bash
-composer require
+composer install
 ```
 
 För att starta en server:
