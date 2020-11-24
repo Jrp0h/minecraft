@@ -17,6 +17,9 @@
         integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
     </script>
 
+    <!--FontAwsome link-->
+    <link rel="stylesheet" href="styles/font-awesome-4.7.0/css/font-awesome.min.css">
+
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -24,25 +27,34 @@
     <nav class="navbar navbar-expand-lg navbar-dark">
         <!--Viktigt att lägga <a> före button och diven för att "brand" ska komma till vänster, annars tvärtom om man vil ha "brand" till höger-->
         <a class="navbar-brand" href="">Minecraft</a>
+        <!-- <a class="navbar-brand" href="https://fontmeme.com/minecraft-font/"><img
+                src="https://fontmeme.com/permalink/201124/5988cc92aa05aec5a381d567ef03f133.png"
+                alt="minecraft-font"></a> -->
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
             aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" href="">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="">Add Coords</a></li>
                 <li class="nav-item"><a class="nav-link" href="">Trades</a></li>
                 <li class="nav-item"><a class="nav-link" href="">Log in</a></li>
+                <li class="nav-item"><a class="btn btn-light btn-sm mt-1 btn-nav" href="">
+                        <i class="fa fa-shopping-cart"></i>
+                        <span class="badge badge-light">0</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
 
     <!-- Container for all Content -->
-    <div class="container">
+    <div class="container mt-2">
 
-        <!-- Input Container -->
+        <!-- Search Container -->
         <div class="container">
             <div class="row">
                 <div class="col-lg-4">
@@ -51,7 +63,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-default">X Position</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="Example -216" aria-label="Default"
+                        <input type="text" class="form-control" placeholder="-216" aria-label="Default"
                             aria-describedby="inputGroup-sizing-default">
                     </div>
                 </div>
@@ -61,7 +73,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-default">Y Position</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="Example 76" aria-label="Default"
+                        <input type="text" class="form-control" placeholder="76" aria-label="Default"
                             aria-describedby="inputGroup-sizing-default">
                     </div>
                 </div>
@@ -71,63 +83,52 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-default">Z Position</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="Example 900" aria-label="Default"
+                        <input type="text" class="form-control" placeholder="900" aria-label="Default"
                             aria-describedby="inputGroup-sizing-default">
                     </div>
                 </div>
-
-            </div>
-
-
-
-
-
-
-
-            <!-- Input description
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-default">Description</span>
+                <div class="col-lg-6">
+                    <!-- Droppdown with worlds -->
+                    <select class="form-control mb-3">
+                        <option>Select World</option>
+                        <option>------------</option>
+                        <option>Overworld</option>
+                        <option>Nether</option>
+                        <option>End</option>
+                    </select>
                 </div>
-                <input type="text" class="form-control" placeholder="This is the Home" aria-label="Default"
-                    aria-describedby="inputGroup-sizing-default">
+                <div class="col-lg-6">
+                    <!-- Droppdown for locations types -->
+                    <select class="form-control mb-3">
+                        <option>Select Location Type</option>
+                        <option>------------</option>
+                        <option>Home</option>
+                        <option>Biom</option>
+                        <option>Spawner</option>
+                        <option>Temple</option>
+                        <option>Misc</option>
+                    </select>
+                </div>
+                <div class="col-lg-12 text-center">
+                    <h2>Coordinates</h2>
+                </div>
+
+            </div>
+
+            <!-- <div class="container">
+            </div>
+            <div class="container">
+
+            </div>
+            <div class="container">
+
+            </div>
+            <div class="container">
+
             </div> -->
-
-            <!-- Container for droppdowns -->
-            <div class="container">
-
-                <!-- Droppdown with worlds -->
-                <select class="form-control mb-3">
-                    <option>Select World</option>
-                    <option>------------</option>
-                    <option>Overworld</option>
-                    <option>Nether</option>
-                    <option>End</option>
-                </select>
-
-                <!-- Droppdown for locations types -->
-                <select class="form-control mb-3">
-                    <option>Select Location Type</option>
-                    <option>------------</option>
-                    <option>Home</option>
-                    <option>Biom</option>
-                    <option>Spawner</option>
-                    <option>Temple</option>
-                    <option>Misc</option>
-                </select>
-            </div>
-            <div class="container">
-
-            </div>
-            <div class="container">
-
-            </div>
-            <div class="container">
-
-            </div>
         </div>
 
-        <script src="scipts/main.js" async defer></script>
+        <script src="scripts/main.js" async defer></script>
 </body>
 
 </html>
