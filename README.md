@@ -1,5 +1,24 @@
 # Minecraft web app
 
+## Starta
+
+Efter clone kör:
+
+```bash
+composer require
+```
+
+För att starta en server:
+
+```bash
+php -S localhost:5000
+```
+
+Servern kommer lyssna på port 5000 och inte 8080 som vanligtvis.
+Om ni har gjort en ändring så behöver ni ibland starta om servern.
+
+PHPMyAdmin är fortfarande på localhost:8080/phpmyadmin
+
 ## CRUD Koordinater
 
 * Lägga till    (INSERT)
