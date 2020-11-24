@@ -13,21 +13,26 @@
 <body>
     <div class="container">
         <div class="card" style="background-color: rgba(255,255,255,0.8);">
-            <div class="card-header">Login</div>
+            <div class="card-header">Register</div>
             <div class="card-body">
                 <form>
                     <div class="form-group">
-                        <label for="username">Minecraft or Discord Username</label>
+                        <label for="mc_username">Minecraft Username</label>
                         <input type="text" class="form-control" id="username" name="username" placeholder="Epic_gamer43">
+                    </div>
+                    <div class="form-group">
+                        <label for="dc_username">Discord Username</label>
+                        <input type="text" class="form-control" id="dc_username" name="dc_username" placeholder="Epic_gamer43#6969">
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                     </div>
-                    <input type="submit" class="btn btn-dark mt-3" value="Login">
+                    <input type="submit" class="btn btn-dark mt-3" value="Register">
                 </form>
             </div>
         </div>
+    </div>
     </div>
 
     <script src="scripts/main.js"></script>
