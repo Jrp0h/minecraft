@@ -11,11 +11,11 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="card">
+    <div class="container mt-5">
+        <div class="card" style="background-color:rgba(255,255,255,0.8);">
             <div class="card-header">Calculator</div>
             <div class="card-body">
-                <form>
+                <form id="calculateForm"> 
                     <div class="row">
                         <div class="col">
                             <div class="form-group">
@@ -35,13 +35,13 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <select class="form-control">
-                                <option>Overworld to Nether</option>
-                                <option>Nether to Overworld</option>
+                            <select class="form-control" id="option">
+                                <option value="otn">Overworld to Nether</option>
+                                <option value="nto">Nether to Overworld</option>
                             </select>
                         </div>
                     </div>
-                    <input type="submit" class="btn btn-primary mt-3" value="Calculate">
+                    <input type="submit" class="btn btn-dark mt-3" value="Calculate">
 
                     <div id="result-container">
                         <hr>
@@ -58,6 +58,7 @@
     </div>
     </div>
 
+    <script src="scripts/calculator.js"></script>
     <script src="scripts/main.js"></script>
 </body>
 
