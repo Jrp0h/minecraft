@@ -1,3 +1,5 @@
+/*----Body----*/
+/*Fixar bakgrunden så att den hamnar över hela bodyn*/
 body {
     margin: 0;
     height: 100%;
@@ -7,6 +9,23 @@ body {
     background-attachment: fixed;
 }
 
+/*----Navbar----*/
+/*Navbarens bakgrund*/
+.navbar {
+    background-color: rgba(0, 0, 0, 0.5)
+}
+
+/*Shoppingcart-knappens bakgrund*/
+.btn-nav {
+    background-color: rgba(255, 255, 255, 0.6);
+    border: none;
+}
+
+.badge {
+    background-color: transparent;
+}
+
+/*Container runt hela "flödet"*/
 .container {
     max-width: 50%;
     background-color: gray;
