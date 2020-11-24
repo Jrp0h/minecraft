@@ -54,11 +54,85 @@
             </ul>
         </div>
     </nav>
-    <div class="container">
 
-    </div>
+    <!-- Container for all Content -->
+    <div class="container mt-2">
 
-    <script src="scripts/main.js" async defer></script>
+        <!-- Search Container -->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <!-- Input X Position -->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default">X Position</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="-216" aria-label="Default"
+                            aria-describedby="inputGroup-sizing-default">
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <!-- Input Y Position -->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Y Position</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="76" aria-label="Default"
+                            aria-describedby="inputGroup-sizing-default">
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <!-- Input Z Position -->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Z Position</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="900" aria-label="Default"
+                            aria-describedby="inputGroup-sizing-default">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <!-- Droppdown with worlds -->
+                    <select class="form-control mb-3">
+                        <option>Select World</option>
+                        <option>------------</option>
+                        <option>Overworld</option>
+                        <option>Nether</option>
+                        <option>End</option>
+                    </select>
+                </div>
+                <div class="col-lg-6">
+                    <!-- Droppdown for locations types -->
+                    <select class="form-control mb-3">
+                        <option>Select Location Type</option>
+                        <option>------------</option>
+                        <option>Home</option>
+                        <option>Biom</option>
+                        <option>Spawner</option>
+                        <option>Temple</option>
+                        <option>Misc</option>
+                    </select>
+                </div>
+                <div class="col-lg-12 text-center">
+                    <h2>Coordinates</h2>
+                </div>
+
+            </div>
+
+            <!-- <div class="container">
+            </div>
+            <div class="container">
+
+            </div>
+            <div class="container">
+
+            </div>
+            <div class="container">
+
+            </div> -->
+        </div>
+
+        <script src="scripts/main.js" async defer></script>
 </body>
 
 </html>

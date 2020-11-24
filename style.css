@@ -1,6 +1,18 @@
+/* Fonts */
+@font-face {
+    font-family: minecraftBig;
+    src: url('/fonts/Minecrafter.Reg.ttf') format('truetype')
+}
+
+@font-face {
+    font-family: minecraft;
+    src: url('/fonts/Minercraftory.ttf') format('truetype')
+}
+
 /*----Body----*/
 /*Fixar bakgrunden så att den hamnar över hela bodyn*/
 body {
+    font-family: minecraft;
     margin: 0;
     height: 100%;
     background-repeat: no-repeat;
@@ -13,6 +25,7 @@ body {
 
 /*Navbarens bakgrund*/
 .navbar {
+    font-family: minecraftBig;
     background-color: rgba(0, 0, 0, 0.5)
 }
 
@@ -28,6 +41,7 @@ body {
 
 /*Container runt hela "flödet"*/
 .container {
-    max-width: 50%;
-    background-color: gray;
+    max-width: 75vw;
+    background-color: rgba(190, 190, 190, 0.7);
+    padding: 50px;
 }
