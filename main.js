@@ -1,5 +1,9 @@
+var body = document.querySelector('body');
+
+
 function randomBackground() {
 
-    var randomPicture = '/images/backgrounds' [Math.floor(Math.random() * 53) + '.jpg'];
+    body.style.backgroundImage = 'url(images/backgrounds/' + (Math.floor(Math.random() * 53) + 1) + '.png';
 }
-return randomPicture;
+
+randomBackground();
