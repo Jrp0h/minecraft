@@ -9,6 +9,17 @@
     src: url('/fonts/Minercraftory.ttf') format('truetype')
 }
 
+@font-face {
+    font-family: defualtText;
+    src: url('/fonts/Squarified.ttf') format('truetype')
+}
+
+/* Fix reading text */
+.fontFix {
+    font-size: 22px;
+    letter-spacing: 0.05em;
+}
+
 /*----Body----*/
 /*Fixar bakgrunden så att den hamnar över hela bodyn*/
 body {
