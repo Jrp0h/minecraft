@@ -10,7 +10,7 @@
 }
 
 @font-face {
-    font-family: defualtText;
+    font-family: defaultText;
     src: url('/fonts/Squarified.ttf') format('truetype')
 }
 
@@ -23,13 +23,14 @@
 /*----Body----*/
 /*Fixar bakgrunden så att den hamnar över hela bodyn*/
 body {
-    font-family: minecraft;
+    /* font-family: minecraft; */
     margin: 0;
     height: 100%;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     background-attachment: fixed;
+    color: white;
 }
 
 /*----Navbar----*/
@@ -37,7 +38,7 @@ body {
 /*Navbarens bakgrund*/
 .navbar {
     font-family: minecraftBig;
-    background-color: rgba(0, 0, 0, 0.5)
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 /*Shoppingcart-knappens bakgrund*/
@@ -53,6 +54,20 @@ body {
 /*Container runt hela "flödet"*/
 .container {
     max-width: 75vw;
-    background-color: rgba(190, 190, 190, 0.7);
     padding: 50px;
+
+}
+
+/*Inre container i flödet*/
+#inner-container {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/*Container för cards (Point of interest)*/
+.card-coords {
+    color: rgb(25, 25, 25);
+}
+
+h2 {
+    font-family: minecraft;
 }
