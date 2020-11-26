@@ -75,3 +75,12 @@ body {
 h2 {
     font-family: minecraft;
 }
+
+
+@media only screen and (max-width: 990px) {
+    .container {
+        max-width: 100%;
+        width: 100%;
+        padding: 1rem;
+    }
+}
