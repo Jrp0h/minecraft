@@ -1,3 +1,15 @@
+<?php 
+print_r($_POST);
+require_once "./includes/validation.php";
+if(!isset($_POST["password"])){
+    echo "password not set";
+}
+
+if(!Validator::matchesRegex($_POST["dc_username"],"/^[A-Za-z]+#\d{4}$/m")){
+    echo "Didn´t match discord name";
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +27,7 @@
         <div class="card" style="background-color: rgba(255,255,255,0.8);">
             <div class="card-header">Register</div>
             <div class="card-body">
-                <form>
+                <form action="register.php" method="POST">
                     <div class="form-group">
                         <label for="mc_username">Minecraft Username</label>
                         <input type="text" class="form-control" id="username" name="username" placeholder="Epic_gamer43">

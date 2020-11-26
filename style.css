@@ -29,9 +29,13 @@ body {
     background-color: rgba(0, 0, 0, 0.5)
 }
 
+.nav-link {
+    color: rgb(219, 219, 219) !important;
+}
+
 /*Shoppingcart-knappens bakgrund*/
 .btn-nav {
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: rgb(219, 219, 219);
     border: none;
 }
 
