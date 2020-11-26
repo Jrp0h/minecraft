@@ -59,13 +59,14 @@
     <div class="container mt-2">
 
         <!-- Search Container -->
-        <div class="container">
+        <div class="container" id="inner-container">
+            <h2>Filter</h2>
             <div class="row">
                 <div class="col-lg-4">
                     <!-- Input X Position -->
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-default">X Position</span>
+                            <span class="input-group-text" id="inputGroup-sizing-default">X</span>
                         </div>
                         <input type="text" class="form-control" placeholder="-216" aria-label="Default"
                             aria-describedby="inputGroup-sizing-default">
@@ -75,7 +76,7 @@
                     <!-- Input Y Position -->
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-default">Y Position</span>
+                            <span class="input-group-text" id="inputGroup-sizing-default">Y</span>
                         </div>
                         <input type="text" class="form-control" placeholder="76" aria-label="Default"
                             aria-describedby="inputGroup-sizing-default">
@@ -85,39 +86,70 @@
                     <!-- Input Z Position -->
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-default">Z Position</span>
+                            <span class="input-group-text" id="inputGroup-sizing-default">Z</span>
                         </div>
                         <input type="text" class="form-control" placeholder="900" aria-label="Default"
                             aria-describedby="inputGroup-sizing-default">
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <!-- Droppdown with worlds -->
-                    <select class="form-control mb-3">
-                        <option>Select World</option>
-                        <option>------------</option>
-                        <option>Overworld</option>
-                        <option>Nether</option>
-                        <option>End</option>
-                    </select>
-                </div>
-                <div class="col-lg-6">
-                    <!-- Droppdown for locations types -->
-                    <select class="form-control mb-3">
-                        <option>Select Location Type</option>
-                        <option>------------</option>
-                        <option>Home</option>
-                        <option>Biom</option>
-                        <option>Spawner</option>
-                        <option>Temple</option>
-                        <option>Misc</option>
-                    </select>
-                </div>
-                <div class="col-lg-12 text-center">
-                    <h2>Coordinates</h2>
+            </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <!-- Droppdown with worlds -->
+                        <select class="form-control mb-3">
+                            <option>Select World</option>
+                            <option>------------</option>
+                            <option>Overworld</option>
+                            <option>Nether</option>
+                            <option>End</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-6">
+                        <!-- Droppdown for locations types -->
+                        <select class="form-control mb-3">
+                            <option>Select Location Type</option>
+                            <option>------------</option>
+                            <option>Home</option>
+                            <option>Biom</option>
+                            <option>Spawner</option>
+                            <option>Temple</option>
+                            <option>Misc</option>
+                        </select>
+                    </div>
                 </div>
 
-            </div>
+                <button class="btn btn-light mb-4" type="button">Search</button>
+
+                <!--Flöde Point of Interest-->
+                    <h2>Points of interest</h2>
+                    <div class="card border-dark mb-3 card-coords" style="max-width: 100%;">
+                        <div class="card-header bg-transparent border-dark">Name of Location</div>
+                        <div class="card-body text-dark">
+                          <h6 class="card-title">X: Y: Z:</h6>
+                          <p class="card-text">Description</p>
+                        </div>
+                        <div class="card-footer bg-transparent border-dark">World -- Location Type</div>
+                      </div>
+<!-- 
+                      <div class="card border-dark mb-3 card-coords " style="max-width: 100%;">
+                        <div class="card-header bg-transparent border-dark">Name of Location</div>
+                        <div class="card-body text-dark">
+                          <h6 class="card-title">X: Y: Z:</h6>
+                          <p class="card-text">Description</p>
+                        </div>
+                        <div class="card-footer bg-transparent border-dark">World -- Location Type</div>
+                      </div>
+
+                    <div class="card border-dark mb-3 card-coords" style="max-width: 100%;">
+                        <div class="card-header bg-transparent border-dark">Name of Location</div>
+                        <div class="card-body text-dark">
+                          <h6 class="card-title">X: Y: Z:</h6>
+                          <p class="card-text">Description</p>
+                        </div>
+                        <div class="card-footer bg-transparent border-dark">World -- Location Type</div>
+                      </div> -->
+                <!-- </div> -->
+
 
             <!-- <div class="container">
             </div>
