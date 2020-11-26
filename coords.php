@@ -1,5 +1,6 @@
 <?php
-    include_once "/includes/validation.php";
+    include_once "./includes/validation.php";
+    include_once "./includes/database.php";
 
     if(isset($_POST["submit"])){
         if(!isset($_POST["x"])||!Validator::isNumber($_POST["x"])){
@@ -14,10 +15,10 @@
             }
         }
 
-        if(!isset($_POST["world"])||!in_array($_POST["world"],["overworld", "nether", "end"])){
+        if(!isset($_POST["world"])||!in_array($_POST["world"],["Overworld", "Nether", "End"])){
             die("You need to choose one of the three options");
         }
-        if(!isset($_POST["location"])||!in_array($_POST["location"],["home", "biome", "temple","spawner", "misc"])){
+        if(!isset($_POST["location"])||!in_array($_POST["location"],["Home", "Biome", "Temple","Spawner", "Misc"])){
             die("You need to choose one of the options");
         }
         if(!isset($_POST["description"])){
@@ -26,6 +27,10 @@
         if(!isset($_POST["name"])){
             die("You need to put in a location name");
         }
+
+        $db = new Database();
+
+        $db->exec("INSERT INTO points_of_interest (user_id,name,x,y,z,image_url,description,location,category) VALUES (:user_id,:name,:x,:y,:z,:image_url,:description,:location,:category)",["user_id"=>1,"name"=>$_POST["name"],"x"=>$_POST["x"],"y"=>$_POST["y"],"z"=>$_POST["z"],"description"=>$_POST["description"], "image_url"=> "jjjjj", "location" => $_POST["world"], "category" => $_POST["location"]]);
     }
 ?>
 <!DOCTYPE html>
@@ -85,9 +90,9 @@
                 <select class="form-control mb-3" name="world">
                     <option>Select World</option>
                     <option>------------</option>
-                    <option value="overworld">Overworld</option>
-                    <option value="nether">Nether</option>
-                    <option value="end">End</option>
+                    <option value="Overworld">Overworld</option>
+                    <option value="Nether">Nether</option>
+                    <option value="End">End</option>
                 </select>
             </div>
             <div class="col-lg-6">
@@ -95,11 +100,11 @@
                 <select class="form-control mb-3" name="location">
                     <option>Select Location Type</option>
                     <option>------------</option>
-                    <option value="home">Home</option>
-                    <option value="biome">Biome</option>
-                    <option value="spawner">Spawner</option>
-                    <option value="temple">Temple</option>
-                    <option value="misc">Misc</option>
+                    <option value="Home">Home</option>
+                    <option value="Biome">Biome</option>
+                    <option value="Spawner">Spawner</option>
+                    <option value="Temple">Temple</option>
+                    <option value="Misc">Misc</option>
                 </select>
             </div>
         </div>
@@ -131,15 +136,15 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-default">Description</span>
                     </div>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" name="desciption"></textarea>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" name="description"></textarea>
                 </div>
             </div>
         </div>
-    </form>
         <!--Button-->
         <div>
-            <button class="btn btn-light" value="submit" name="submit">Add</button>
+            <input type="submit" class="btn btn-light" value="Add" name="submit">
         </div>
+    </form>
     </div>
 
     <script src="scripts/main.js"></script>
