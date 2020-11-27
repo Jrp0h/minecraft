@@ -5,7 +5,7 @@ CREATE TABLE points_of_interest (
     x int (11) NOT NULL,
     y int (11),
     z int (11) NOT NULL,
-    image_url varchar(100),
+    looted boolean,
     description text NOT NULL,
     location ENUM("Overworld", "Nether", "End") NOT NULL,
     category ENUM("Home", "Biom", "Spawner", "Temple", "Misc") NOT NULL,

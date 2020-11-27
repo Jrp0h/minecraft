@@ -6,14 +6,14 @@ $errors = [];
 
 if (isset($_POST["submit"])) {
     if (!isset($_POST["x"]) || !Validator::isNumber($_POST["x"])) {
-        $errors["x"] = ("x can´t be empty or non-numeric");
+        $errors["x"] = ("X can´t be empty or non-numeric");
     }
     if (!isset($_POST["z"]) || !Validator::isNumber($_POST["z"])) {
-        $errors["z"] = ("z can´t be empty or non-numeric");
+        $errors["z"] = ("Z can´t be empty or non-numeric");
     }
     if (isset($_POST["y"])) {
         if (!Validator::isNumber($_POST["y"])) {
-            $errors["y"] = ("y can´t be non-numeric");
+            $errors["y"] = ("Y can´t be non-numeric");
         }
     }
 
@@ -32,7 +32,7 @@ if (isset($_POST["submit"])) {
 
     $db = new Database();
     if (count($errors) <= 0) {
-        $db->exec("INSERT INTO points_of_interest (user_id,name,x,y,z,image_url,description,location,category) VALUES (:user_id,:name,:x,:y,:z,:image_url,:description,:location,:category)", ["user_id" => 1, "name" => $_POST["name"], "x" => $_POST["x"], "y" => $_POST["y"], "z" => $_POST["z"], "description" => $_POST["description"], "image_url" => "jjjjj", "location" => $_POST["world"], "category" => $_POST["location"]]);
+        $db->exec("INSERT INTO points_of_interest (user_id,name,x,y,z,looted,description,location,category) VALUES (:user_id,:name,:x,:y,:z,:looted,:description,:location,:category)", ["user_id" => 1, "name" => $_POST["name"], "x" => $_POST["x"], "y" => $_POST["y"], "z" => $_POST["z"], "description" => $_POST["description"], "looted" => "", "location" => $_POST["world"], "category" => $_POST["location"]]);
     }
 }
 ?>
@@ -224,7 +224,7 @@ if (isset($_POST["submit"])) {
 
             <div class="row">
                 <?php if (isset($errors["name"])) : ?>
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
                         <!-- Name of Location -->
                         <div class="form-group">
                             <div class="input-group mb-1">
@@ -241,7 +241,7 @@ if (isset($_POST["submit"])) {
                 <?php else : ?>
 
 
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
                         <!-- Name of Location -->
                         <div class="form-group">
                             <div class="input-group mb-3">
@@ -254,19 +254,6 @@ if (isset($_POST["submit"])) {
                     </div>
 
                 <?php endif; ?>
-
-
-                <div class="col-lg-6">
-                    <!-- Image -->
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-default">Image</span>
-                        </div>
-                        <input type="file" class="form-control" placeholder="img" name="img">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
 
                 <?php if (isset($errors["description"])) : ?>
 
@@ -302,9 +289,15 @@ if (isset($_POST["submit"])) {
 
 
             </div>
+            <!-- Looted -->
+            <div>
+                <input type="checkbox" class="form-check-input ml-1" name="looted">
+                <label class="form-check-label ml-4">Looted</label>
+            </div>
             <!--Button-->
             <div>
-                <input type="submit" class="btn btn-light" value="Add" name="submit">
+
+                <input type="submit" class="btn btn-light mt-3" value="Add" name="submit">
             </div>
         </form>
     </div>
