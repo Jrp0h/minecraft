@@ -80,7 +80,7 @@ if (isset($_POST["submit"])) {
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroup-sizing-default">X</span>
                             </div>
-                            <input type="text" class="form-control" placeholder="-216" name="x">
+                            <input type="text" class="form-control" placeholder="-216" value="" name="x">
                         </div>
                     </div>
                 <?php endif; ?>
@@ -147,32 +147,79 @@ if (isset($_POST["submit"])) {
             </div>
 
             <div class="row">
-                <div class="col-lg-6">
-                    <!-- Droppdown with worlds -->
-                    <select class="form-control mb-3" name="world">
-                        <option>Select World</option>
-                        <option>------------</option>
-                        <option value="Overworld">Overworld</option>
-                        <option value="Nether">Nether</option>
-                        <option value="End">End</option>
-                    </select>
-                </div>
-                <div class="col-lg-6">
-                    <!-- Droppdown for locations types -->
-                    <select class="form-control mb-3" name="location">
-                        <option>Select Location Type</option>
-                        <option>------------</option>
-                        <option value="Home">Home</option>
-                        <option value="Biome">Biome</option>
-                        <option value="Spawner">Spawner</option>
-                        <option value="Temple">Temple</option>
-                        <option value="Misc">Misc</option>
-                    </select>
-                </div>
+
+                <?php if (isset($errors["world"])) : ?>
+                    <div class="col-lg-6">
+                        <!-- Droppdown with worlds -->
+                        <div class="form-group">
+                            <select class="form-control mb-1 is-invalid" name="world">
+                                <option>Select World</option>
+                                <option>------------</option>
+                                <option value="Overworld">Overworld</option>
+                                <option value="Nether">Nether</option>
+                                <option value="End">End</option>
+                            </select>
+                            <small class="text-danger">
+                                <?php echo $errors["world"]; ?>
+                            </small>
+                        </div>
+                    </div>
+
+                <?php else : ?>
+                    <div class="col-lg-6">
+                        <!-- Droppdown with worlds -->
+                        <div class="form-group">
+                            <select class="form-control mb-3" name="world">
+                                <option>Select World</option>
+                                <option>------------</option>
+                                <option value="Overworld">Overworld</option>
+                                <option value="Nether">Nether</option>
+                                <option value="End">End</option>
+                            </select>
+                        </div>
+                    </div>
+
+                <?php endif; ?>
+
+                <?php if (isset($errors["location"])) : ?>
+                    <div class="col-lg-6">
+                        <!-- Droppdown for locations types -->
+                        <select class="form-control mb-1 is-invalid" name="location">
+                            <option>Select Location Type</option>
+                            <option>------------</option>
+                            <option value="Home">Home</option>
+                            <option value="Biome">Biome</option>
+                            <option value="Spawner">Spawner</option>
+                            <option value="Temple">Temple</option>
+                            <option value="Misc">Misc</option>
+                        </select>
+                        <small class="text-danger">
+                            <?php echo $errors["location"]; ?>
+                        </small>
+                    </div>
+                <?php else : ?>
+
+
+                    <div class="col-lg-6">
+                        <!-- Droppdown for locations types -->
+                        <select class="form-control mb-3" name="location">
+                            <option>Select Location Type</option>
+                            <option>------------</option>
+                            <option value="Home">Home</option>
+                            <option value="Biome">Biome</option>
+                            <option value="Spawner">Spawner</option>
+                            <option value="Temple">Temple</option>
+                            <option value="Misc">Misc</option>
+                        </select>
+                    </div>
+
+                <?php endif; ?>
+
+
             </div>
 
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-6">
                     <!-- Name of Location -->
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
