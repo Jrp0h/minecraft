@@ -24,10 +24,10 @@ if (isset($_POST["submit"])) {
     if (!isset($_POST["location"]) || !in_array($_POST["location"], ["Home", "Biome", "Temple", "Spawner", "Misc"])) {
         $errors["location"] = ("You need to choose one of the options");
     }
-    if (!isset($_POST["description"])) {
+    if (!isset($_POST["description"]) || $_POST["description"] == "") {
         $errors["description"] = ("You need to put in a description");
     }
-    if (!isset($_POST["name"])) {
+    if (!isset($_POST["name"]) || $_POST["name"] == "") {
         $errors["name"] = ("You need to put in a location name");
     }
 
@@ -189,33 +189,37 @@ if (isset($_POST["submit"])) {
                 <?php if (isset($errors["location"])) : ?>
                     <div class="col-lg-6">
                         <!-- Droppdown for locations types -->
-                        <select class="form-control mb-1 is-invalid" name="location">
-                            <option>Select Location Type</option>
-                            <option>------------</option>
-                            <option value="Home">Home</option>
-                            <option value="Biome">Biome</option>
-                            <option value="Spawner">Spawner</option>
-                            <option value="Temple">Temple</option>
-                            <option value="Misc">Misc</option>
-                        </select>
-                        <small class="text-danger">
-                            <?php echo $errors["location"]; ?>
-                        </small>
+                        <div class="form-group">
+                            <select class="form-control mb-1 is-invalid" name="location">
+                                <option>Select Location Type</option>
+                                <option>------------</option>
+                                <option value="Home">Home</option>
+                                <option value="Biome">Biome</option>
+                                <option value="Spawner">Spawner</option>
+                                <option value="Temple">Temple</option>
+                                <option value="Misc">Misc</option>
+                            </select>
+                            <small class="text-danger">
+                                <?php echo $errors["location"]; ?>
+                            </small>
+                        </div>
                     </div>
                 <?php else : ?>
 
 
                     <div class="col-lg-6">
                         <!-- Droppdown for locations types -->
-                        <select class="form-control mb-3" name="location">
-                            <option>Select Location Type</option>
-                            <option>------------</option>
-                            <option value="Home">Home</option>
-                            <option value="Biome">Biome</option>
-                            <option value="Spawner">Spawner</option>
-                            <option value="Temple">Temple</option>
-                            <option value="Misc">Misc</option>
-                        </select>
+                        <div class="form-group">
+                            <select class="form-control mb-3" name="location">
+                                <option>Select Location Type</option>
+                                <option>------------</option>
+                                <option value="Home">Home</option>
+                                <option value="Biome">Biome</option>
+                                <option value="Spawner">Spawner</option>
+                                <option value="Temple">Temple</option>
+                                <option value="Misc">Misc</option>
+                            </select>
+                        </div>
                     </div>
 
                 <?php endif; ?>
@@ -224,26 +228,71 @@ if (isset($_POST["submit"])) {
             </div>
 
             <div class="row">
-                <div class="col-lg-6">
-                    <!-- Name of Location -->
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-default">Name of location</span>
+                <?php if (isset($errors["name"])) : ?>
+                    <div class="col-lg-12">
+                        <!-- Name of Location -->
+                        <div class="form-group">
+                            <div class="input-group mb-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Name of location</span>
+                                </div>
+                                <input type="text" class="form-control is-invalid" placeholder="Marqus house" name="name">
+                            </div>
+                            <small class="text-danger">
+                                <?php echo $errors["name"]; ?>
+                            </small>
                         </div>
-                        <input type="text" class="form-control" placeholder="Marqus house" name="name">
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <!-- Description -->
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">Description</span>
+                <?php else : ?>
+
+
+                    <div class="col-lg-12">
+                        <!-- Name of Location -->
+                        <div class="form-group">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Name of location</span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Marqus house" name="name">
+                            </div>
                         </div>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" name="description"></textarea>
                     </div>
-                </div>
+
+                <?php endif; ?>
+
+                <?php if (isset($errors["description"])) : ?>
+
+
+                    <div class="col-lg-12">
+                        <!-- Description -->
+                        <div class="form-group">
+                            <div class="input-group mb-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Description</span>
+                                </div>
+                                <textarea class="form-control is-invalid" rows="5" name="description"></textarea>
+                            </div>
+                            <small class="text-danger">
+                                <?php echo $errors["description"]; ?>
+                            </small>
+                        </div>
+                    </div>
+
+                <?php else : ?>
+                    <div class="col-lg-12">
+                        <!-- Description -->
+                        <div class="form-group">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Description</span>
+                                </div>
+                                <textarea class="form-control" rows="5" name="description"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
+
+
             </div>
             <!-- Looted -->
             <div>
