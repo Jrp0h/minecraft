@@ -76,6 +76,11 @@ h2 {
     font-family: minecraft;
 }
 
+/* 
+.is-invalid::placeholder {
+    color: red;
+} */
+
 
 @media only screen and (max-width: 990px) {
     .container {

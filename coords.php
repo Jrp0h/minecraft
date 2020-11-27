@@ -2,35 +2,38 @@
     include_once "./includes/validation.php";
     include_once "./includes/database.php";
 
+    $errors = [];
+
     if(isset($_POST["submit"])){
         if(!isset($_POST["x"])||!Validator::isNumber($_POST["x"])){
-            die("x can´t be empty, can´t be non-numeric");
+            $errors["x"]=("x can´t be empty or non-numeric");
         }
         if(!isset($_POST["z"])||!Validator::isNumber($_POST["z"])){
-            die("z can´t be empty, can´t be non-numeric");
+            $errors["z"]=("z can´t be empty or non-numeric");
         }
         if(isset($_POST["y"])){
             if(!Validator::isNumber($_POST["y"])) {
-                die("y can´t be non-numeric");
+                $errors["y"]=("y can´t be non-numeric");
             }
         }
 
         if(!isset($_POST["world"])||!in_array($_POST["world"],["Overworld", "Nether", "End"])){
-            die("You need to choose one of the three options");
+            $errors["world"]=("You need to choose one of the three options");
         }
         if(!isset($_POST["location"])||!in_array($_POST["location"],["Home", "Biome", "Temple","Spawner", "Misc"])){
-            die("You need to choose one of the options");
+            $errors["location"]=("You need to choose one of the options");
         }
         if(!isset($_POST["description"])){
-            die("You need to put in a description");
+            $errors["description"]=("You need to put in a description");
         }
         if(!isset($_POST["name"])){
-            die("You need to put in a location name");
+            $errors["name"]=("You need to put in a location name");
         }
 
         $db = new Database();
-
-        $db->exec("INSERT INTO points_of_interest (user_id,name,x,y,z,image_url,description,location,category) VALUES (:user_id,:name,:x,:y,:z,:image_url,:description,:location,:category)",["user_id"=>1,"name"=>$_POST["name"],"x"=>$_POST["x"],"y"=>$_POST["y"],"z"=>$_POST["z"],"description"=>$_POST["description"], "image_url"=> "jjjjj", "location" => $_POST["world"], "category" => $_POST["location"]]);
+        if(count($errors) <= 0){
+            $db->exec("INSERT INTO points_of_interest (user_id,name,x,y,z,image_url,description,location,category) VALUES (:user_id,:name,:x,:y,:z,:image_url,:description,:location,:category)",["user_id"=>1,"name"=>$_POST["name"],"x"=>$_POST["x"],"y"=>$_POST["y"],"z"=>$_POST["z"],"description"=>$_POST["description"], "image_url"=> "jjjjj", "location" => $_POST["world"], "category" => $_POST["location"]]);
+        }
     }
 ?>
 <!DOCTYPE html>
@@ -56,6 +59,24 @@
         <h2>Add Point of Interest</h2>
         <form method="POST" action="#">
         <div class="row">
+
+    <!--PHP if X sats-->
+        <?php if(isset($errors["x"])): ?>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <!-- Input X Position -->
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend" >
+                            <span class="input-group-text" id="inputGroup-sizing-default">X</span>
+                        </div>
+                        <input type="number" class="form-control is-invalid" placeholder="312" name="x">
+                    </div>
+                    <small  class="text-danger"><?php  echo $errors["x"];?></small>
+                </div>
+            </div>
+
+        <?php else:?>
+
             <div class="col-lg-4">
                 <!-- Input X Position -->
                 <div class="input-group mb-3">
@@ -65,25 +86,69 @@
                     <input type="text" class="form-control" placeholder="-216" name="x">
                 </div>
             </div>
+        <?php endif; ?>
+
+     <!--PHP if Y sats-->
+        <?php  if(isset($errors["y"])):?>
             <div class="col-lg-4">
                 <!-- Input Y Position -->
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroup-sizing-default">Y</span>
+                <div class="form-group">
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Y</span>
+                        </div>
+                        <input type="text" class="form-control is-invalid" placeholder="76" name="y">
                     </div>
-                    <input type="text" class="form-control" placeholder="76" name="y">
+                    <small class="text-danger"> <?php echo $errors["y"];?> </small>
                 </div>
             </div>
+
+        <?php  else:?>
+            <div class="col-lg-4">
+                <!-- Input Y Position -->
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Y</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="76" name="y">
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+
+
+    <!--PHP if Z sats-->
+        <?php  if(isset($errors["z"])):?>
             <div class="col-lg-4">
                 <!-- Input Z Position -->
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroup-sizing-default">Z</span>
+                <div class="form-group">
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Z</span>
+                        </div>
+                        <input type="text" class="form-control is-invalid" placeholder="900" name="z">
                     </div>
-                    <input type="text" class="form-control" placeholder="900" name="z">
+                    <small class="text-danger"> <?php echo $errors["z"];?> </small>
                 </div>
             </div>
+
+        <?php else:?>
+            <div class="col-lg-4">
+                <!-- Input Z Position -->
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Z</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="900" name="z">
+                    </div>
+                </div>
+            </div>
+<?php endif;?>
+
         </div>
+
         <div class="row">
             <div class="col-lg-6">
                 <!-- Droppdown with worlds -->
