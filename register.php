@@ -1,5 +1,6 @@
 <?php
 require_once "./includes/validation.php";
+require_once "./includes/database.php";
 
 $errors = [];
 
@@ -11,8 +12,13 @@ if (isset($_POST["submit"])) {
     if (!isset($_POST["dc_username"]) || $_POST["dc_username"] == "" || !Validator::matchesRegex($_POST["dc_username"], "/^[A-Za-z]+#\d{4}$/m")) {
         $errors["dc_username"] = ("Invalid Discord username");
     }
-    if (!isset($_POST["password"]) || $_POST["password"] == "" || !Validator::matchesRegex($_POST["password"], "/[A-Z]/m") || !Validator::matchesRegex($_POST["password"], "/d/m") || !Validator::matchesRegex($_POST["password"], "/^\S{8,}$/m")) {
+    if (!isset($_POST["password"]) || $_POST["password"] == "" || !Validator::matchesRegex($_POST["password"], "/[A-Z]/m") || !Validator::matchesRegex($_POST["password"], "/\d/m") || !Validator::matchesRegex($_POST["password"], "/^\S{8,}$/m")) {
         $errors["password"] = ("Password must contain at least 8 Characters (At least 1 uppercase and 1 number)");
+    }
+
+    $db = new Database();
+    if (count($errors) <= 0) {
+        $db->exec("INSERT INTO users (dc_username, mc_username, password) VALUES (:dc_username, :mc_username, :password)", ["dc_username" => $_POST["dc_username"], "mc_username" => $_POST["mc_username"], "password" => password_hash($_POST["password"], PASSWORD_BCRYPT)]);
     }
 }
 
@@ -54,7 +60,7 @@ if (isset($_POST["submit"])) {
 
                         <div class="form-group">
                             <label for="mc_username">Minecraft Username</label>
-                            <input type="text" class="form-control" id="username" name="mc_username" placeholder="Epic_gamer43">
+                            <input type="text" class="form-control" id="username" value="<?php echo isset($_POST["mc_username"]) ? $_POST["mc_username"] : ""; ?>" name="mc_username" placeholder="Epic_gamer43">
                         </div>
 
                     <?php endif; ?>
@@ -74,7 +80,7 @@ if (isset($_POST["submit"])) {
 
                         <div class="form-group">
                             <label for="dc_username">Discord Username</label>
-                            <input type="text" class="form-control" id="dc_username" name="dc_username" placeholder="Epic_gamer43#6969">
+                            <input type="text" class="form-control" id="dc_username" value="<?php echo isset($_POST["dc_username"]) ? $_POST["dc_username"] : ""; ?>" name="dc_username" placeholder="Epic_gamer43#6969">
                         </div>
 
                     <?php endif; ?>

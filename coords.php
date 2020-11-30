@@ -85,7 +85,7 @@ if (isset($_POST["submit"])) {
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroup-sizing-default">X</span>
                             </div>
-                            <input type="text" class="form-control" placeholder="-216" value="" name="x">
+                            <input type="text" class="form-control" placeholder="-216" value="<?php echo isset($_POST["x"]) ? $_POST["x"] : ""; ?>" name="x">
                         </div>
                     </div>
                 <?php endif; ?>
@@ -113,7 +113,7 @@ if (isset($_POST["submit"])) {
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroup-sizing-default">Y</span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="76" name="y">
+                                <input type="text" class="form-control" value="<?php echo isset($_POST["y"]) ? $_POST["y"] : ""; ?>" placeholder="76" name="y">
                             </div>
                         </div>
                     </div>
@@ -143,7 +143,7 @@ if (isset($_POST["submit"])) {
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroup-sizing-default">Z</span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="900" name="z">
+                                <input type="text" class="form-control" value="<?php echo isset($_POST["z"]) ? $_POST["z"] : ""; ?>" placeholder="900" name="z">
                             </div>
                         </div>
                     </div>
@@ -253,7 +253,7 @@ if (isset($_POST["submit"])) {
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroup-sizing-default">Name of location</span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="Marqus house" name="name">
+                                <input type="text" class="form-control" value="<?php echo isset($_POST["name"]) ? $_POST["name"] : ""; ?>" placeholder="Marqus house" name="name">
                             </div>
                         </div>
                     </div>
@@ -286,7 +286,7 @@ if (isset($_POST["submit"])) {
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroup-sizing-default">Description</span>
                                 </div>
-                                <textarea class="form-control" rows="5" name="description"></textarea>
+                                <textarea class="form-control" rows="5" name="description"><?php echo isset($_POST["description"]) ? $_POST["description"] : ""; ?></textarea>
                             </div>
                         </div>
                     </div>
