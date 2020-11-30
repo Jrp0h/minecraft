@@ -11,8 +11,6 @@ class Validator {
 
     static function matchesRegex($input,$regex){
          preg_match($regex, $input, $matches);
-         return count($matches) == 0;
+         return count($matches) != 0;
     }
 }
-
-?>
