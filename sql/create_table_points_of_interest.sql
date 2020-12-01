@@ -9,6 +9,7 @@ CREATE TABLE points_of_interest (
     description text NOT NULL,
     location ENUM("Overworld", "Nether", "End") NOT NULL,
     category ENUM("Home", "Biom", "Spawner", "Temple", "Misc") NOT NULL,
+    created_at DATETIME NOT NULL DEFAULT NOW(),
     PRIMARY KEY(id),
     FOREIGN KEY(user_id) REFERENCES users(id)
 );
