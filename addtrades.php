@@ -9,10 +9,10 @@
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
-    </script>
+        </script>
     <link rel="stylesheet" href="/styles/style.css">
 </head>
 
@@ -36,10 +36,10 @@
                     <!-- Input Item -->
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-default">Item</span>
+                            <span class="input-group-text">Item</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="String" aria-label="Default"
-                            aria-describedby="inputGroup-sizing-default">
+                        <input type="text" class="form-control" placeholder="String">
+
                     </div>
                 </div>
 
@@ -47,10 +47,10 @@
                     <!-- Input Item -->
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-default">Secondary Item</span>
+                            <span class="input-group-text">Secondary Item</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="" aria-label="Default"
-                            aria-describedby="inputGroup-sizing-default">
+                        <input type="text" class="form-control" placeholder="">
+
                     </div>
                 </div>
 
@@ -58,12 +58,11 @@
                     <!-- Input Emeralds -->
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-default">
+                            <span class="input-group-text">
                                 <img src="/images/emerald.png" width="20" height="20">
                             </span>
                         </div>
-                        <input type="text" class="form-control" placeholder="How many emeralds you get"
-                            aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        <input type="text" class="form-control" placeholder="How many emeralds you get">
                     </div>
                 </div>
             </div>
@@ -94,10 +93,9 @@
                     <!-- Input Enchantment -->
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-default">Enchantment</span>
+                            <span class="input-group-text">Enchantment</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="Sharpness V" aria-label="Default"
-                            aria-describedby="inputGroup-sizing-default">
+                        <input type="text" class="form-control" placeholder="Sharpness V">
                     </div>
                 </div>
 
@@ -105,12 +103,11 @@
                     <!-- Input Emeralds -->
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-default">
+                            <span class="input-group-text">
                                 <img src="/images/emerald.png" width="20" height="20">
                             </span>
                         </div>
-                        <input type="text" class="form-control" placeholder="How many emeralds it costs"
-                            aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        <input type="text" class="form-control" placeholder="How many emeralds it costs">
                     </div>
                 </div>
             </div>

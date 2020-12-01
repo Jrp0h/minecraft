@@ -7,7 +7,7 @@ CREATE TABLE points_of_interest (
     z int (11) NOT NULL,
     looted boolean,
     description text NOT NULL,
-    location ENUM("Overworld", "Nether", "End") NOT NULL,
+    world ENUM("Overworld", "Nether", "End") NOT NULL,
     category ENUM("Home", "Biom", "Spawner", "Temple", "Misc") NOT NULL,
     created_at DATETIME NOT NULL DEFAULT NOW(),
     PRIMARY KEY(id),

@@ -57,8 +57,9 @@ body {
 
 /*Container runt hela "flödet"*/
 .container {
+    margin-top: 4rem;
     max-width: 75vw;
-    padding: 50px;
+    padding: 25px;
 
 }
 

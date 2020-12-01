@@ -12,6 +12,9 @@ $errors = [];
 
 $y = null;
 
+$worlds = ["Overworld", "Nether", "End"];
+$categories = ["Home", "Biome", "Temple", "Spawner", "Misc"];
+
 if (isset($_POST["submit"])) {
     if (!isset($_POST["x"]) || !Validator::isNumber($_POST["x"])) {
         $errors["x"] = ("X can´t be empty or non-numeric");
@@ -26,11 +29,11 @@ if (isset($_POST["submit"])) {
         }
     }
 
-    if (!isset($_POST["world"]) || !in_array($_POST["world"], ["Overworld", "Nether", "End"])) {
+    if (!isset($_POST["world"]) || !in_array($_POST["world"], $worlds)) {
         $errors["world"] = ("You need to choose one of the three options");
     }
-    if (!isset($_POST["location"]) || !in_array($_POST["location"], ["Home", "Biome", "Temple", "Spawner", "Misc"])) {
-        $errors["location"] = ("You need to choose one of the options");
+    if (!isset($_POST["category"]) || !in_array($_POST["category"], $categories)) {
+        $errors["category"] = ("You need to choose one of the options");
     }
     if (!isset($_POST["description"]) || $_POST["description"] == "") {
         $errors["description"] = ("You need to put in a description");
@@ -42,10 +45,25 @@ if (isset($_POST["submit"])) {
     $db = new Database();
     if (count($errors) <= 0) {
         $looted = 0;
+
         if (isset($_POST["looted"])) {
             $looted = intval($_POST["looted"] == "on");
         }
-        $db->exec("INSERT INTO points_of_interest (user_id,name,x,y,z,looted,description,location,category) VALUES (:user_id,:name,:x,:y,:z,:looted,:description,:location,:category)", ["user_id" => 8, "name" => $_POST["name"], "x" => $_POST["x"], "y" => $y, "z" => $_POST["z"], "description" => $_POST["description"], "looted" => $looted, "location" => $_POST["world"], "category" => $_POST["location"]]);
+
+        $db->exec("INSERT INTO points_of_interest (user_id, name, x, y, z, looted, description, world, category) VALUES (:user_id, :name, :x, :y, :z, :looted, :description, :world, :category)",
+            [
+                "user_id" => 8,
+                "name" => $_POST["name"],
+                "x" => $_POST["x"],
+                "y" => $y,
+                "z" => $_POST["z"],
+                "description" => $_POST["description"],
+                "looted" => $looted,
+                "world" => $_POST["world"],
+                "category" => $_POST["category"]
+            ]);
+
+        header("Location: index.php");
     }
 }
 ?>
@@ -55,7 +73,7 @@ if (isset($_POST["submit"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Add Coords</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
     </script>
@@ -70,9 +88,6 @@ if (isset($_POST["submit"])) {
 
     <?php require('navbar.php'); ?>
 
-    <div class="container">
-
-
         <div class="container" id="inner-container">
             <h2>Add Point of Interest</h2>
             <form method="POST" action="#">
@@ -85,7 +100,7 @@ if (isset($_POST["submit"])) {
                                 <!-- Input X Position -->
                                 <div class="input-group mb-1">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="inputGroup-sizing-default">X</span>
+                                        <span class="input-group-text">X</span>
                                     </div>
                                     <input type="number" class="form-control is-invalid" placeholder="312" name="x">
                                 </div>
@@ -99,7 +114,7 @@ if (isset($_POST["submit"])) {
                             <!-- Input X Position -->
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroup-sizing-default">X</span>
+                                    <span class="input-group-text">X</span>
                                 </div>
                                 <input type="text" class="form-control" placeholder="-216" value="<?php echo isset($_POST["x"]) ? $_POST["x"] : ""; ?>" name="x">
                             </div>
@@ -113,7 +128,7 @@ if (isset($_POST["submit"])) {
                             <div class="form-group">
                                 <div class="input-group mb-1">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="inputGroup-sizing-default">Y</span>
+                                        <span class="input-group-text">Y</span>
                                     </div>
                                     <input type="text" class="form-control is-invalid" placeholder="76" name="y">
                                 </div>
@@ -127,7 +142,7 @@ if (isset($_POST["submit"])) {
                             <div class="form-group">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="inputGroup-sizing-default">Y</span>
+                                        <span class="input-group-text">Y</span>
                                     </div>
                                     <input type="text" class="form-control" value="<?php echo isset($_POST["y"]) ? $_POST["y"] : ""; ?>" placeholder="76" name="y">
                                 </div>
@@ -143,7 +158,7 @@ if (isset($_POST["submit"])) {
                             <div class="form-group">
                                 <div class="input-group mb-1">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="inputGroup-sizing-default">Z</span>
+                                        <span class="input-group-text">Z</span>
                                     </div>
                                     <input type="text" class="form-control is-invalid" placeholder="900" name="z">
                                 </div>
@@ -157,7 +172,7 @@ if (isset($_POST["submit"])) {
                             <div class="form-group">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="inputGroup-sizing-default">Z</span>
+                                        <span class="input-group-text">Z</span>
                                     </div>
                                     <input type="text" class="form-control" value="<?php echo isset($_POST["z"]) ? $_POST["z"] : ""; ?>" placeholder="900" name="z">
                                 </div>
@@ -176,71 +191,60 @@ if (isset($_POST["submit"])) {
                                 <select class="form-control mb-1 is-invalid" name="world">
                                     <option>Select World</option>
                                     <option>------------</option>
-                                    <option value="Overworld">Overworld</option>
-                                    <option value="Nether">Nether</option>
-                                    <option value="End">End</option>
+                                    <?php foreach($worlds as $w): ?>
+                                        <option value="<?php echo $w; ?>"><?php echo $w; ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                                 <small class="text-danger">
                                     <?php echo $errors["world"]; ?>
                                 </small>
                             </div>
                         </div>
-
                     <?php else : ?>
                         <div class="col-lg-6">
                             <!-- Droppdown with worlds -->
                             <div class="form-group">
-                                <select class="form-control mb-3" name="world">
+                                <select class="form-control mb-3" name="world"> 
                                     <option>Select World</option>
                                     <option>------------</option>
-                                    <option value="Overworld">Overworld</option>
-                                    <option value="Nether">Nether</option>
-                                    <option value="End">End</option>
+                                    <?php foreach($worlds as $w): ?>
+                                        <option <?php echo isset($_POST["world"]) && $_POST["world"] == $w ? "selected" : ""; ?> value="<?php echo $w; ?>"><?php echo $w; ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                         </div>
-
                     <?php endif; ?>
 
-                    <?php if (isset($errors["location"])) : ?>
+                    <?php if (isset($errors["category"])) : ?>
                         <div class="col-lg-6">
                             <!-- Droppdown for locations types -->
                             <div class="form-group">
-                                <select class="form-control mb-1 is-invalid" name="location">
-                                    <option>Select Location Type</option>
+                                <select class="form-control mb-1 is-invalid" name="category">
+                                    <option>Select Category</option>
                                     <option>------------</option>
-                                    <option value="Home">Home</option>
-                                    <option value="Biome">Biome</option>
-                                    <option value="Spawner">Spawner</option>
-                                    <option value="Temple">Temple</option>
-                                    <option value="Misc">Misc</option>
+                                    <?php foreach($categories as $c): ?>
+                                        <option value="<?php echo $c; ?>"><?php echo $c; ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                                 <small class="text-danger">
-                                    <?php echo $errors["location"]; ?>
+                                    <?php echo $errors["category"]; ?>
                                 </small>
                             </div>
                         </div>
                     <?php else : ?>
-
-
                         <div class="col-lg-6">
                             <!-- Droppdown for locations types -->
                             <div class="form-group">
-                                <select class="form-control mb-3" name="location">
-                                    <option>Select Location Type</option>
+                            <select class="form-control mb-3" name="category" value="<?php echo isset($_POST["category"]) ? $_POST["category"] : ""; ?>">
+                                    <option>Select Category</option>
                                     <option>------------</option>
-                                    <option value="Home">Home</option>
-                                    <option value="Biome">Biome</option>
-                                    <option value="Spawner">Spawner</option>
-                                    <option value="Temple">Temple</option>
-                                    <option value="Misc">Misc</option>
+                                    <?php foreach($categories as $c): ?>
+                                        <option <?php echo isset($_POST["category"]) && $_POST["category"] == $c ? "selected" : ""; ?> value="<?php echo $c; ?>"><?php echo $c; ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                         </div>
-
                     <?php endif; ?>
-
-
                 </div>
 
                 <div class="row">
@@ -250,7 +254,7 @@ if (isset($_POST["submit"])) {
                             <div class="form-group">
                                 <div class="input-group mb-1">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="inputGroup-sizing-default">Name of location</span>
+                                        <span class="input-group-text">Name of location</span>
                                     </div>
                                     <input type="text" class="form-control is-invalid" placeholder="Marqus house" name="name">
                                 </div>
@@ -267,7 +271,7 @@ if (isset($_POST["submit"])) {
                             <div class="form-group">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="inputGroup-sizing-default">Name of location</span>
+                                        <span class="input-group-text">Name of location</span>
                                     </div>
                                     <input type="text" class="form-control" value="<?php echo isset($_POST["name"]) ? $_POST["name"] : ""; ?>" placeholder="Marqus house" name="name">
                                 </div>
@@ -284,7 +288,7 @@ if (isset($_POST["submit"])) {
                             <div class="form-group">
                                 <div class="input-group mb-1">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="inputGroup-sizing-default">Description</span>
+                                        <span class="input-group-text">Description</span>
                                     </div>
                                     <textarea class="form-control is-invalid" rows="5" name="description"></textarea>
                                 </div>
@@ -300,7 +304,7 @@ if (isset($_POST["submit"])) {
                             <div class="form-group">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="inputGroup-sizing-default">Description</span>
+                                        <span class="input-group-text">Description</span>
                                     </div>
                                     <textarea class="form-control" rows="5" name="description"><?php echo isset($_POST["description"]) ? $_POST["description"] : ""; ?></textarea>
                                 </div>
@@ -321,7 +325,6 @@ if (isset($_POST["submit"])) {
                     <input type="submit" class="btn btn-light mt-3" value="Add" name="submit">
                 </div>
             </form>
-        </div>
     </div>
 
     <script src="scripts/main.js"></script>

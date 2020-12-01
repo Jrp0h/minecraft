@@ -13,11 +13,11 @@
             85.24.194.62
         </a>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <div class="collapse navbar-collapse" id="navbar">
             <ul class="navbar-nav ml-auto text-right">
                 <li class="nav-item"><a class="nav-link" href="index.php">Home / </a></li>
                 <li class="nav-item"><a class="nav-link" href="">Trades / </a></li>

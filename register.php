@@ -8,46 +8,64 @@ if (Auth::isLoggedIn()) {
     die();
 }
 
-
 $errors = [];
 
 if (isset($_POST["submit"])) {
 
     if (isset($_POST["mc_username"])) {
         if ($_POST["mc_username"] == "") {
-            $errors["mc_username"] = ("You need to write your minecraft username");
+            $errors["mc_username"] = "You need to enter your minecraft username";
         } else {
             $db = new Database();
-            $double = $db->query("SELECT mc_username FROM users WHERE mc_username = :mc_username", ["mc_username" => $_POST["mc_username"]]);
-            if (count($double) > 0) {
-                $errors["mc_username"] = ("That username already exist as a user");
+
+            $result = $db->query(
+                "SELECT mc_username FROM users WHERE mc_username = :mc_username", 
+                ["mc_username" => $_POST["mc_username"]]
+            );
+
+            if (count($result) > 0) {
+                $errors["mc_username"] = "That minecraft username is already registered";
             }
         }
     } else {
-        $errors["mc_username"] = ("You need to write your minecraft username");
+        $errors["mc_username"] = "You need to enter your minecraft username";
     }
 
     if (isset($_POST["dc_username"])) {
         if ($_POST["dc_username"] == "" || !Validator::matchesRegex($_POST["dc_username"], "/^.+#\d{4}$/m")) {
-            $errors["dc_username"] = ("You need to write your discord username");
+            $errors["dc_username"] = "Invalid discord username";
         } else {
             $db = new Database();
-            $double = $db->query("SELECT dc_username FROM users WHERE dc_username = :dc_username", ["dc_username" => $_POST["dc_username"]]);
-            if (count($double) > 0) {
-                $errors["dc_username"] = ("That discord name already exist as a user");
+            
+            $result = $db->query(
+                "SELECT dc_username FROM users WHERE dc_username = :dc_username",
+                ["dc_username" => $_POST["dc_username"]]
+            );
+
+            if (count($result) > 0) {
+                $errors["dc_username"] = "That discord username is already registered";
             }
         }
     } else {
-        $errors["dc_username"] = ("You need to write your discord name");
+        $errors["dc_username"] = "You need to write your discord username";
     }
 
     if (!isset($_POST["password"]) || $_POST["password"] == "" || !Validator::matchesRegex($_POST["password"], "/[A-Z]/m") || !Validator::matchesRegex($_POST["password"], "/\d/m") || !Validator::matchesRegex($_POST["password"], "/^\S{8,}$/m")) {
-        $errors["password"] = ("Password must contain at least 8 Characters (At least 1 uppercase and 1 number)");
+        $errors["password"] = "Password must contain at least 8 Characters (At least 1 uppercase and 1 number)";
     }
 
     $db = new Database();
     if (count($errors) <= 0) {
-        $db->exec("INSERT INTO users (dc_username, mc_username, password) VALUES (:dc_username, :mc_username, :password)", ["dc_username" => $_POST["dc_username"], "mc_username" => $_POST["mc_username"], "password" => password_hash($_POST["password"], PASSWORD_BCRYPT)]);
+
+        $db->exec(
+            "INSERT INTO users (dc_username, mc_username, password) VALUES (:dc_username, :mc_username, :password)",
+            [
+                "dc_username" => $_POST["dc_username"],
+                "mc_username" => $_POST["mc_username"],
+                "password" => password_hash($_POST["password"], PASSWORD_BCRYPT)
+            ]
+        );
+
         header("Location: login.php");
     }
 }
@@ -72,17 +90,9 @@ if (isset($_POST["submit"])) {
 </head>
 
 <body>
-
-
     <?php require('navbar.php'); ?>
-
-
-    <div class="container">
-        <div class="card" id="inner-container">
-            <div class="card-header">
+        <div class="container" id="inner-container">
                 <h2>Register</h2>
-            </div>
-            <div class="card-body">
                 <form action="register.php" method="POST">
                     <?php if (isset($errors["mc_username"])) : ?>
                         <div class="form-group">
@@ -123,7 +133,6 @@ if (isset($_POST["submit"])) {
                     <?php endif; ?>
 
                     <?php if (isset($errors["password"])) : ?>
-
                         <div class="form-group">
                             <label for="password">Password</label>
                             <input type="password" class="form-control is-invalid" id="password" name="password" placeholder="Password">
@@ -132,20 +141,18 @@ if (isset($_POST["submit"])) {
                             </small>
                         </div>
                     <?php else : ?>
-
-
                         <div class="form-group">
                             <label for="password">Password</label>
                             <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                            <small style="color: rgb(200, 200, 200);">
+                                Must contain at least 8 Characters (At least 1 uppercase and 1 number)
+                            </small>
                         </div>
                     <?php endif; ?>
 
                     <input type="submit" name="submit" class="btn btn-light mt-3" value="Register">
                 </form>
-            </div>
         </div>
-    </div>
-    </div>
 
     <script src="scripts/main.js"></script>
 </body>

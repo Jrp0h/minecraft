@@ -36,7 +36,6 @@ $result = $db->query("SELECT * FROM points_of_interest");
     <?php require('navbar.php'); ?>
 
     <!-- Container for all Content -->
-    <div class="container mt-2">
 
         <!-- Search Container -->
         <div class="container" id="inner-container">
@@ -46,9 +45,9 @@ $result = $db->query("SELECT * FROM points_of_interest");
                     <!-- Input X Position -->
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-default">X</span>
+                            <span class="input-group-text">X</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="-216" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        <input type="text" class="form-control" placeholder="-216">
                     </div>
                 </div>
 
@@ -56,9 +55,9 @@ $result = $db->query("SELECT * FROM points_of_interest");
                     <!-- Input Z Position -->
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-default">Z</span>
+                            <span class="input-group-text">Z</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="900" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        <input type="text" class="form-control" placeholder="900">
                     </div>
                 </div>
                 <div class="col-lg-3">
@@ -74,10 +73,10 @@ $result = $db->query("SELECT * FROM points_of_interest");
                 <div class="col-lg-3">
                     <!-- Droppdown for locations types -->
                     <select class="form-control mb-3">
-                        <option>Select Location Type</option>
+                        <option>Select Category</option>
                         <option>------------</option>
                         <option>Home</option>
-                        <option>Biom</option>
+                        <option>Biome</option>
                         <option>Spawner</option>
                         <option>Temple</option>
                         <option>Misc</option>
@@ -96,7 +95,7 @@ $result = $db->query("SELECT * FROM points_of_interest");
                         <h6 class="card-title">X: <?php echo $row["x"]; ?> Y: <?php echo $row["y"]; ?> Z: <?php echo $row["z"]; ?></h6>
                         <p class="card-text">Description: <?php echo $row["description"]; ?></p>
                     </div>
-                    <div class="card-footer bg-transparent border-dark"><?php echo $row["location"]; ?> -- <?php echo $row["category"]; ?></div>
+                    <div class="card-footer bg-transparent border-dark"><?php echo $row["world"]; ?> -- <?php echo $row["category"]; ?></div>
                 </div>
             <?php endforeach; ?>
         </div>

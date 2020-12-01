@@ -52,35 +52,26 @@ while (isset($_POST["submit"])) {
 </head>
 
 <body>
-
     <?php require('navbar.php'); ?>
-
-
-    <div class="container">
-        <div class="card" id="inner-container">
-            <div class="card-header">
-                <h2>Login</h2>
-            </div>
-            <div class="card-body">
-                <?php if ($errors) : ?>
-                    <p class="text-danger">
-                        Invalid password/username
-                    </p>
-                <?php endif; ?>
-                <form method="POST">
-                    <div class="form-group">
-                        <label for="username">Minecraft or Discord Username</label>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Epic_gamer43">
-                    </div>
-                    <div class="form-group">
-                        <label for="paord">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-                    </div>
-                    <input type="submit" class="btn btn-light mt-3" value="Login" name="submit">
-                </form>
-            </div>
+        <div class="container" id="inner-container">
+            <h2>Login</h2>
+            <?php if ($errors) : ?>
+                <p class="text-danger">
+                    Invalid password/username
+                </p>
+            <?php endif; ?>
+            <form method="POST">
+                <div class="form-group">
+                    <label for="username">Minecraft or Discord Username</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Epic_gamer43">
+                </div>
+                <div class="form-group">
+                    <label for="paord">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                </div>
+                <input type="submit" class="btn btn-light mt-3" value="Login" name="submit">
+            </form>
         </div>
-    </div>
 
     <script src="scripts/main.js"></script>
 </body>
