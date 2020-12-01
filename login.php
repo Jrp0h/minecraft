@@ -3,6 +3,13 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 include_once "./includes/database.php";
+include_once "./includes/auth.php";
+
+if (Auth::isLoggedIn()) {
+    header("Location: index.php");
+    die();
+}
+
 $errors = false;
 
 while (isset($_POST["submit"])) {

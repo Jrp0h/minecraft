@@ -1,6 +1,12 @@
 <?php
 include_once "./includes/validation.php";
 include_once "./includes/database.php";
+require_once "./includes/auth.php";
+
+if (!Auth::isLoggedIn()) {
+    header("Location: login.php");
+    die();
+}
 
 $errors = [];
 
