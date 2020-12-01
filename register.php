@@ -13,12 +13,34 @@ $errors = [];
 
 if (isset($_POST["submit"])) {
 
-    if (!isset($_POST["mc_username"]) || $_POST["mc_username"] == "") {
-        $errors["mc_username"] = ("You need to choose one of the options");
+    if (isset($_POST["mc_username"])) {
+        if ($_POST["mc_username"] == "") {
+            $errors["mc_username"] = ("You need to write your minecraft username");
+        } else {
+            $db = new Database();
+            $double = $db->query("SELECT mc_username FROM users WHERE mc_username = :mc_username", ["mc_username" => $_POST["mc_username"]]);
+            if (count($double) > 0) {
+                $errors["mc_username"] = ("That username already exist as a user");
+            }
+        }
+    } else {
+        $errors["mc_username"] = ("You need to write your minecraft username");
     }
-    if (!isset($_POST["dc_username"]) || $_POST["dc_username"] == "" || !Validator::matchesRegex($_POST["dc_username"], "/^.+#\d{4}$/m")) {
-        $errors["dc_username"] = ("Invalid Discord username");
+
+    if (isset($_POST["dc_username"])) {
+        if ($_POST["dc_username"] == "" || !Validator::matchesRegex($_POST["dc_username"], "/^.+#\d{4}$/m")) {
+            $errors["dc_username"] = ("You need to write your discord username");
+        } else {
+            $db = new Database();
+            $double = $db->query("SELECT dc_username FROM users WHERE dc_username = :dc_username", ["dc_username" => $_POST["dc_username"]]);
+            if (count($double) > 0) {
+                $errors["dc_username"] = ("That discord name already exist as a user");
+            }
+        }
+    } else {
+        $errors["dc_username"] = ("You need to write your discord name");
     }
+
     if (!isset($_POST["password"]) || $_POST["password"] == "" || !Validator::matchesRegex($_POST["password"], "/[A-Z]/m") || !Validator::matchesRegex($_POST["password"], "/\d/m") || !Validator::matchesRegex($_POST["password"], "/^\S{8,}$/m")) {
         $errors["password"] = ("Password must contain at least 8 Characters (At least 1 uppercase and 1 number)");
     }

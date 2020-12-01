@@ -42,7 +42,7 @@ $result = $db->query("SELECT * FROM points_of_interest");
         <div class="container" id="inner-container">
             <h2>Filter</h2>
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <!-- Input X Position -->
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
@@ -51,16 +51,8 @@ $result = $db->query("SELECT * FROM points_of_interest");
                         <input type="text" class="form-control" placeholder="-216" aria-label="Default" aria-describedby="inputGroup-sizing-default">
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <!-- Input Y Position -->
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-default">Y</span>
-                        </div>
-                        <input type="text" class="form-control" placeholder="76" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-                    </div>
-                </div>
-                <div class="col-lg-4">
+
+                <div class="col-lg-3">
                     <!-- Input Z Position -->
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
@@ -69,9 +61,7 @@ $result = $db->query("SELECT * FROM points_of_interest");
                         <input type="text" class="form-control" placeholder="900" aria-label="Default" aria-describedby="inputGroup-sizing-default">
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-3">
                     <!-- Droppdown with worlds -->
                     <select class="form-control mb-3">
                         <option>Select World</option>
@@ -81,7 +71,7 @@ $result = $db->query("SELECT * FROM points_of_interest");
                         <option>End</option>
                     </select>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-3">
                     <!-- Droppdown for locations types -->
                     <select class="form-control mb-3">
                         <option>Select Location Type</option>
