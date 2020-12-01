@@ -52,7 +52,7 @@ if (isset($_POST["submit"])) {
 
         $db->exec("INSERT INTO points_of_interest (user_id, name, x, y, z, looted, description, world, category) VALUES (:user_id, :name, :x, :y, :z, :looted, :description, :world, :category)",
             [
-                "user_id" => 8,
+                "user_id" => Auth::userId(),
                 "name" => $_POST["name"],
                 "x" => $_POST["x"],
                 "y" => $y,

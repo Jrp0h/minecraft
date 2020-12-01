@@ -92,10 +92,19 @@ $result = $db->query("SELECT * FROM points_of_interest");
                 <div class="card border-dark mb-3 card-coords" style="max-width: 100%;">
                     <div class="card-header bg-transparent border-dark"><b><?php echo $row["name"]; ?></b></div>
                     <div class="card-body text-dark">
-                        <h6 class="card-title">X: <?php echo $row["x"]; ?> Y: <?php echo $row["y"]; ?> Z: <?php echo $row["z"]; ?></h6>
+                        <h6 class="card-title">X: <?php echo $row["x"]; ?> <?php echo $row["y"] == null ? "" : "Y: " . $row["y"]; ?> Z: <?php echo $row["z"]; ?></h6>
                         <p class="card-text">Description: <?php echo $row["description"]; ?></p>
                     </div>
-                    <div class="card-footer bg-transparent border-dark"><?php echo $row["world"]; ?> -- <?php echo $row["category"]; ?></div>
+                    <div class="card-footer bg-transparent border-dark">
+                        <div class="row">
+                            <div class="col">
+                                <?php echo $row["world"]; ?> -- <?php echo $row["category"]; ?>
+                            </div>
+                            <div class="col text-right">
+                                HAJ HAJ
+                            </div>
+                        </div>                    
+                    </div>
                 </div>
             <?php endforeach; ?>
         </div>

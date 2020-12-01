@@ -69,11 +69,16 @@
 
             <div id="result-container">
                 <hr>
-                <h3>Result</h3>
+                <h2>Result</h2>
                 <p>
-                    <b id="resX">X</b>
-                    <b id="resY">Y</b>
-                    <b id="resZ">Z</b>
+                    <b>X:</b>
+                    <i id="resX">X</i>
+
+                    <b>Y:</b>
+                    <i id="resY">y</i>
+
+                    <b>Z:</b>
+                    <i id="resZ"></i>
                 </p>
             </div>
         </form>

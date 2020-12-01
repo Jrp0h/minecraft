@@ -11,10 +11,9 @@ if (Auth::isLoggedIn()) {
 $errors = [];
 
 if (isset($_POST["submit"])) {
-
     if (isset($_POST["mc_username"])) {
-        if ($_POST["mc_username"] == "") {
-            $errors["mc_username"] = "You need to enter your minecraft username";
+        if ($_POST["mc_username"] == "" || !Validator::matchesRegex($_POST['mc_username'], "/^[a-zA-Z_\d]{3,16}+$/m")) {
+            $errors["mc_username"] = "Invalid minecraft username";
         } else {
             $db = new Database();
 

@@ -12,6 +12,11 @@ class Auth
         return isset($_SESSION["user_id"]);
     }
 
+    static function userId()
+    {
+        return $_SESSION["user_id"];
+    }
+
     static function user()
     {
         $db = new Database();
