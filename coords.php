@@ -4,6 +4,7 @@ include_once "./includes/database.php";
 
 $errors = [];
 
+$y = null;
 
 if (isset($_POST["submit"])) {
     if (!isset($_POST["x"]) || !Validator::isNumber($_POST["x"])) {
@@ -12,7 +13,8 @@ if (isset($_POST["submit"])) {
     if (!isset($_POST["z"]) || !Validator::isNumber($_POST["z"])) {
         $errors["z"] = ("Z can´t be empty or non-numeric");
     }
-    if (isset($_POST["y"])) {
+    if (isset($_POST["y"]) && $_POST["y"] != "") {
+        $y = $_POST["y"];
         if (!Validator::isNumber($_POST["y"])) {
             $errors["y"] = ("Y can´t be non-numeric");
         }
@@ -33,11 +35,11 @@ if (isset($_POST["submit"])) {
 
     $db = new Database();
     if (count($errors) <= 0) {
-        $looted = false;
+        $looted = 0;
         if (isset($_POST["looted"])) {
-            $looted = $_POST["looted"] == "on";
+            $looted = intval($_POST["looted"] == "on");
         }
-        $db->exec("INSERT INTO points_of_interest (user_id,name,x,y,z,looted,description,location,category) VALUES (:user_id,:name,:x,:y,:z,:looted,:description,:location,:category)", ["user_id" => 8, "name" => $_POST["name"], "x" => $_POST["x"], "y" => $_POST["y"], "z" => $_POST["z"], "description" => $_POST["description"], "looted" => null, "location" => $_POST["world"], "category" => $_POST["location"]]);
+        $db->exec("INSERT INTO points_of_interest (user_id,name,x,y,z,looted,description,location,category) VALUES (:user_id,:name,:x,:y,:z,:looted,:description,:location,:category)", ["user_id" => 8, "name" => $_POST["name"], "x" => $_POST["x"], "y" => $y, "z" => $_POST["z"], "description" => $_POST["description"], "looted" => $looted, "location" => $_POST["world"], "category" => $_POST["location"]]);
     }
 }
 ?>
