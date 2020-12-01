@@ -36,10 +36,17 @@ if (isset($_POST["submit"])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
     </script>
     <link rel="stylesheet" href="/styles/style.css">
+    <!--FontAwsome link-->
+    <link rel="stylesheet" href="styles/font-awesome-4.7.0/css/font-awesome.min.css">
 
 </head>
 
 <body>
+
+
+    <?php require('navbar.php'); ?>
+
+
     <div class="container">
         <div class="card" id="inner-container">
             <div class="card-header">
