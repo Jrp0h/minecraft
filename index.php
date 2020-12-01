@@ -1,3 +1,12 @@
+<?php
+include_once "./includes/validation.php";
+include_once "./includes/database.php";
+
+$db = new Database();
+$result = $db->query("SELECT * FROM points_of_interest");
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -90,14 +99,16 @@
 
             <!--Flöde Point of Interest-->
             <h2>Points of interest</h2>
-            <div class="card border-dark mb-3 card-coords" style="max-width: 100%;">
-                <div class="card-header bg-transparent border-dark">Name of Location</div>
-                <div class="card-body text-dark">
-                    <h6 class="card-title">X: Y: Z:</h6>
-                    <p class="card-text">Description</p>
+            <?php foreach ($result as $key => $row) :  ?>
+                <div class="card border-dark mb-3 card-coords" style="max-width: 100%;">
+                    <div class="card-header bg-transparent border-dark"><?php echo $row["name"]; ?></div>
+                    <div class="card-body text-dark">
+                        <h6 class="card-title">X: <?php echo $row["x"]; ?> Y: <?php echo $row["y"]; ?> Z: <?php echo $row["z"]; ?></h6>
+                        <p class="card-text">Description: <?php echo $row["description"]; ?></p>
+                    </div>
+                    <div class="card-footer bg-transparent border-dark"><?php echo $row["location"]; ?> -- <?php echo $row["category"]; ?></div>
                 </div>
-                <div class="card-footer bg-transparent border-dark">World -- Location Type</div>
-            </div>
+            <?php endforeach; ?>
             <!-- 
                       <div class="card border-dark mb-3 card-coords " style="max-width: 100%;">
                         <div class="card-header bg-transparent border-dark">Name of Location</div>
@@ -117,19 +128,6 @@
                         <div class="card-footer bg-transparent border-dark">World -- Location Type</div>
                       </div> -->
             <!-- </div> -->
-
-
-            <!-- <div class="container">
-            </div>
-            <div class="container">
-
-            </div>
-            <div class="container">
-
-            </div>
-            <div class="container">
-
-            </div> -->
         </div>
 
         <script src="scripts/main.js" async defer></script>
