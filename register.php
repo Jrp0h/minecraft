@@ -19,6 +19,7 @@ if (isset($_POST["submit"])) {
     $db = new Database();
     if (count($errors) <= 0) {
         $db->exec("INSERT INTO users (dc_username, mc_username, password) VALUES (:dc_username, :mc_username, :password)", ["dc_username" => $_POST["dc_username"], "mc_username" => $_POST["mc_username"], "password" => password_hash($_POST["password"], PASSWORD_BCRYPT)]);
+        header("Location: login.php");
     }
 }
 

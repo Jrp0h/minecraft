@@ -1,3 +1,31 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+include_once "./includes/database.php";
+$errors = false;
+
+while (isset($_POST["submit"])) {
+    $db = new Database();
+    $save = $db->query("SELECT * FROM users WHERE mc_username = :username OR dc_username  = :username", ["username" => $_POST["username"]]);
+    if (count($save) != 1) {
+        $errors = true;
+        break;
+    }
+    $save = $save[0];
+
+    if (!password_verify($_POST["password"], $save["password"])) {
+        $errors = true;
+        break;
+    }
+    $_SESSION["user_id"] = $save["id"];
+    header("Location: index.php");
+    break;
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,16 +55,21 @@
                 <h2>Login</h2>
             </div>
             <div class="card-body">
-                <form>
+                <?php if ($errors) : ?>
+                    <p class="text-danger">
+                        Invalid password/username
+                    </p>
+                <?php endif; ?>
+                <form method="POST">
                     <div class="form-group">
                         <label for="username">Minecraft or Discord Username</label>
                         <input type="text" class="form-control" id="username" name="username" placeholder="Epic_gamer43">
                     </div>
                     <div class="form-group">
-                        <label for="password">Password</label>
+                        <label for="paord">Password</label>
                         <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                     </div>
-                    <input type="submit" class="btn btn-light mt-3" value="Login">
+                    <input type="submit" class="btn btn-light mt-3" value="Login" name="submit">
                 </form>
             </div>
         </div>

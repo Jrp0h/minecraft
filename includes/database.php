@@ -15,7 +15,8 @@ class Database{
             return $this->con->query($query);
         }
         $stmt = $this->con->prepare($query);
-        return $stmt->execute($params);
+        $stmt->execute($params);
+        return $stmt->fetchAll();
     }
 
     function exec($query, $params = null)
