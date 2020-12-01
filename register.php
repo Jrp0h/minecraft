@@ -9,7 +9,7 @@ if (isset($_POST["submit"])) {
     if (!isset($_POST["mc_username"]) || $_POST["mc_username"] == "") {
         $errors["mc_username"] = ("You need to choose one of the options");
     }
-    if (!isset($_POST["dc_username"]) || $_POST["dc_username"] == "" || !Validator::matchesRegex($_POST["dc_username"], "/^[A-Za-z]+#\d{4}$/m")) {
+    if (!isset($_POST["dc_username"]) || $_POST["dc_username"] == "" || !Validator::matchesRegex($_POST["dc_username"], "/^.+#\d{4}$/m")) {
         $errors["dc_username"] = ("Invalid Discord username");
     }
     if (!isset($_POST["password"]) || $_POST["password"] == "" || !Validator::matchesRegex($_POST["password"], "/[A-Z]/m") || !Validator::matchesRegex($_POST["password"], "/\d/m") || !Validator::matchesRegex($_POST["password"], "/^\S{8,}$/m")) {

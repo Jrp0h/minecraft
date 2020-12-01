@@ -109,25 +109,6 @@ $result = $db->query("SELECT * FROM points_of_interest");
                     <div class="card-footer bg-transparent border-dark"><?php echo $row["location"]; ?> -- <?php echo $row["category"]; ?></div>
                 </div>
             <?php endforeach; ?>
-            <!-- 
-                      <div class="card border-dark mb-3 card-coords " style="max-width: 100%;">
-                        <div class="card-header bg-transparent border-dark">Name of Location</div>
-                        <div class="card-body text-dark">
-                          <h6 class="card-title">X: Y: Z:</h6>
-                          <p class="card-text">Description</p>
-                        </div>
-                        <div class="card-footer bg-transparent border-dark">World -- Location Type</div>
-                      </div>
-
-                    <div class="card border-dark mb-3 card-coords" style="max-width: 100%;">
-                        <div class="card-header bg-transparent border-dark">Name of Location</div>
-                        <div class="card-body text-dark">
-                          <h6 class="card-title">X: Y: Z:</h6>
-                          <p class="card-text">Description</p>
-                        </div>
-                        <div class="card-footer bg-transparent border-dark">World -- Location Type</div>
-                      </div> -->
-            <!-- </div> -->
         </div>
 
         <script src="scripts/main.js" async defer></script>
