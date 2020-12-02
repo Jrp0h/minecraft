@@ -2,19 +2,96 @@
 include_once "./includes/validation.php";
 include_once "./includes/database.php";
 
-$db = new Database();
-$result = $db->query("SELECT poi.*, users.dc_username AS user_dc_username, users.mc_username AS user_mc_username
-FROM points_of_interest AS poi
-INNER JOIN users
-ON poi.user_id = users.id
-ORDER BY poi.created_at DESC;");
 
-$value = 0;
+$queries = [
+    // 0 - Default 
+    "SELECT 
+	points_of_interest.*,
+	users.dc_username AS user_dc_username,
+	users.mc_username AS user_mc_username
+	FROM points_of_interest
+	INNER JOIN users
+	ON points_of_interest.user_id = users.id
+	ORDER BY created_at DESC;",
+
+    // 1 - World only
+    "SELECT 
+	points_of_interest.*,
+	users.dc_username AS user_dc_username,
+	users.mc_username AS user_mc_username
+	FROM points_of_interest
+	INNER JOIN users 
+	ON points_of_interest.user_id = users.id
+	WHERE world = :world
+    ORDER BY created_at DESC;",
+
+    // 2 - Category only
+    "SELECT 
+	points_of_interest.*,
+	users.dc_username AS user_dc_username,
+	users.mc_username AS user_mc_username
+	FROM points_of_interest
+	INNER JOIN users 
+	ON points_of_interest.user_id = users.id
+	WHERE category = :category
+    ORDER BY created_at DESC;",
+
+    // 3 - World and Category
+    "SELECT 
+	points_of_interest.*,
+	users.dc_username AS user_dc_username,
+	users.mc_username AS user_mc_username
+	FROM points_of_interest
+	INNER JOIN users 
+	ON points_of_interest.user_id = users.id
+	WHERE world = :world
+	AND category = :category
+    ORDER BY created_at DESC;",
+
+    // 4 - Position only (INVALID)
+    "",
+
+    // 5 - Position and World
+    "SELECT 
+	points_of_interest.*,
+	users.dc_username AS user_dc_username,
+	users.mc_username AS user_mc_username,
+	SQRT((POWER(x - :x,2) + POWER(z - :z,2))) AS distance
+	FROM points_of_interest 
+	INNER JOIN users 
+	ON points_of_interest.user_id = users.id
+	WHERE world = :world
+    ORDER BY distance;",
+
+    // 6 - Position and Category (INVALID)
+    "",
+
+    // 7 - Position, World and Category
+    "SELECT 
+	points_of_interest.*,
+	users.dc_username AS user_dc_username,
+	users.mc_username AS user_mc_username,
+    SQRT((POWER(x - :x,2) + POWER(z - :z,2))) AS distance
+    FROM points_of_interest 
+	INNER JOIN users 
+	ON points_of_interest.user_id = users.id
+	WHERE world = :world
+    AND category = :category
+    ORDER BY distance;",
+];
+
+
+
+
 
 $worlds = ["Overworld", "Nether", "End"];
 $categories = ["Home", "Biome", "Temple", "Spawner", "Misc"];
 
+$value = 0;
 $errors = [];
+
+$params = [];
+
 
 if (isset($_GET["search"])) {
 
@@ -22,12 +99,14 @@ if (isset($_GET["search"])) {
         if (!in_array($_GET["world"], $worlds)) {
             $errors["world"] = "You need to choose one of the three options";
         }
+        $params["world"] = $_GET["world"];
         $value += 1;
     }
     if (isset($_GET["category"]) && $_GET["category"] != "") {
         if (!in_array($_GET["category"], $categories)) {
             $errors["category"] = "You need to choose one of the options";
         }
+        $params["category"] = $_GET["category"];
         $value += 2;
     }
 
@@ -39,12 +118,15 @@ if (isset($_GET["search"])) {
         if (!Validator::isNumber($_GET["x"])) {
             $errors["x"] = "X must be a number";
         }
+        $params["x"] = $_GET["x"];
     }
     if (isset($_GET["z"]) && $_GET["z"] != "") {
         $zExists = true;
         if (!Validator::isNumber($_GET["z"])) {
             $errors["z"] = "z must be a number";
         }
+        $z = $_GET["z"];
+        $params["z"] = $_GET["z"];
     }
 
     if ($xExists || $zExists) {
@@ -63,10 +145,12 @@ if (isset($_GET["search"])) {
     }
     if (count($errors) > 0) {
         $value = 0;
+        $params = [];
     }
 }
 
-
+$db = new Database();
+$result = $db->query($queries[$value], $params);
 
 ?>
 
@@ -105,74 +189,122 @@ if (isset($_GET["search"])) {
         <form method="GET">
             <h2>Filter</h2>
             <div class="row">
-                <div class="col-lg-3">
-                    <!-- Input X Position -->
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">X</span>
-                        </div>
-                        <input name="x" type="text" class="form-control" placeholder="-216">
-                    </div>
-                </div>
-
-                <div class="col-lg-3">
-                    <!-- Input X Position -->
-                    <div class="form-group">
+                <?php if (!isset($errors["x"])) : ?>
+                    <div class="col-lg-3">
+                        <!-- Input X Position -->
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">X</span>
                             </div>
                             <input name="x" type="text" class="form-control" placeholder="-216">
+                        </div>
+                    </div>
+
+                <?php else : ?>
+
+                    <div class="col-lg-3">
+                        <!-- Input X Position -->
+                        <div class="form-group">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">X</span>
+                                </div>
+                                <input name="x" type="text" class="form-control" placeholder="-216">
+                            </div>
                             <small class="text-danger">You need to have a X coord aswell</small>
                         </div>
                     </div>
-                </div>
+                <?php endif; ?>
 
-                <div class="col-lg-3">
-                    <!-- Input Z Position -->
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">Z</span>
-                        </div>
-                        <input name="z" type="text" class="form-control" placeholder="900">
-                    </div>
-                </div>
 
-                <div class="col-lg-3">
-                    <!-- Input Z Position -->
-                    <div clas="form-group">
+                <?php if (!isset($errors["z"])) : ?>
+                    <div class="col-lg-3">
+                        <!-- Input Z Position -->
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Z</span>
                             </div>
                             <input name="z" type="text" class="form-control" placeholder="900">
+                        </div>
+                    </div>
+                <?php else : ?>
+                    <div class="col-lg-3">
+                        <!-- Input Z Position -->
+                        <div clas="form-group">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Z</span>
+                                </div>
+                                <input name="z" type="text" class="form-control" placeholder="900">
+                            </div>
                             <small class="text-danger">You need to have a Z coord aswell</small>
                         </div>
                     </div>
-                </div>
+                <?php endif; ?>
 
-                <div class="col-lg-3">
-                    <!-- Droppdown with worlds -->
-                    <select name="world" class="form-control mb-3">
-                        <option value="">Select World</option>
-                        <option value="">------------</option>
-                        <option>Overworld</option>
-                        <option>Nether</option>
-                        <option>End</option>
-                    </select>
-                </div>
-                <div class="col-lg-3">
-                    <!-- Droppdown for locations types -->
-                    <select name="category" class="form-control mb-3">
-                        <option value="">Select Category</option>
-                        <option value="">------------</option>
-                        <option>Home</option>
-                        <option>Biome</option>
-                        <option>Spawner</option>
-                        <option>Temple</option>
-                        <option>Misc</option>
-                    </select>
-                </div>
+                <?php if (isset($errors["world"])) : ?>
+                    <div class="col-lg-3">
+                        <!-- Droppdown with worlds -->
+                        <div class="form-group">
+                            <select class="form-control mb-1 is-invalid" name="world">
+                                <option value="">Select World</option>
+                                <option value="">------------</option>
+                                <?php foreach ($worlds as $w) : ?>
+                                    <option value="<?php echo $w; ?>"><?php echo $w; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                            <small class="text-danger">
+                                <?php echo $errors["world"]; ?>
+                            </small>
+                        </div>
+                    </div>
+                <?php else : ?>
+                    <div class="col-lg-3">
+                        <!-- Droppdown with worlds -->
+                        <div class="form-group">
+                            <select class="form-control mb-3" name="world">
+                                <option value="">Select World</option>
+                                <option value="">------------</option>
+                                <?php foreach ($worlds as $w) : ?>
+                                    <option <?php echo isset($_POST["world"]) && $_POST["world"] == $w ? "selected" : ""; ?> value="<?php echo $w; ?>"><?php echo $w; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                <?php endif; ?>
+
+
+                <?php if (isset($errors["category"])) : ?>
+                    <div class="col-lg-3">
+                        <!-- Droppdown for locations types -->
+                        <div class="form-group">
+                            <select class="form-control mb-1 is-invalid" name="category">
+                                <option value="">Select Category</option>
+                                <option value="">------------</option>
+                                <?php foreach ($categories as $c) : ?>
+                                    <option value="<?php echo $c; ?>"><?php echo $c; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                            <small class="text-danger">
+                                <?php echo $errors["category"]; ?>
+                            </small>
+                        </div>
+                    </div>
+                <?php else : ?>
+                    <div class="col-lg-3">
+                        <!-- Droppdown for locations types -->
+                        <div class="form-group">
+                            <select class="form-control mb-3" name="category" value="<?php echo isset($_POST["category"]) ? $_POST["category"] : ""; ?>">
+                                <option value="">Select Category</option>
+                                <option value="">------------</option>
+                                <?php foreach ($categories as $c) : ?>
+                                    <option <?php echo isset($_POST["category"]) && $_POST["category"] == $c ? "selected" : ""; ?> value="<?php echo $c; ?>"><?php echo $c; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                <?php endif; ?>
+
             </div>
 
 
@@ -187,6 +319,9 @@ if (isset($_GET["search"])) {
                 <div class="card-body text-dark">
                     <h6 class="card-title">X: <?php echo $row["x"]; ?> <?php echo $row["y"] == null ? "" : "Y: " . $row["y"]; ?> Z: <?php echo $row["z"]; ?></h6>
                     <p class="card-text">Description: <?php echo $row["description"]; ?></p>
+                    <?php if (isset($row["distance"])) : ?>
+                        <p class="card-text">Distance: <?php echo round($row["distance"]); ?></p>
+                    <?php endif; ?>
                 </div>
                 <div class="card-footer bg-transparent border-dark">
                     <div class="row">
