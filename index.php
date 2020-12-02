@@ -56,6 +56,19 @@ ORDER BY poi.created_at DESC;");
             </div>
 
             <div class="col-lg-3">
+                <!-- Input X Position -->
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">X</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="-216">
+                        <small class="text-danger">You need to have a X coord aswell</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3">
                 <!-- Input Z Position -->
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -64,6 +77,20 @@ ORDER BY poi.created_at DESC;");
                     <input type="text" class="form-control" placeholder="900">
                 </div>
             </div>
+
+            <div class="col-lg-3">
+                <!-- Input Z Position -->
+                <div clas="form-group">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Z</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="900">
+                        <small class="text-danger">You need to have a Z coord aswell</small>
+                    </div>
+                </div>
+            </div>
+
             <div class="col-lg-3">
                 <!-- Droppdown with worlds -->
                 <select class="form-control mb-3">
