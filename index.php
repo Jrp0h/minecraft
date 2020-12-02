@@ -328,10 +328,10 @@ $result = $db->query($queries[$value], $params);
         <h2>Points of interest</h2>
         <?php foreach ($result as $key => $row) :  ?>
             <div class="card border-dark mb-3 card-coords" style="max-width: 100%;">
-                <div class="card-header bg-transparent border-dark"><b><?php echo $row["name"]; ?></b></div>
+                <div class="card-header bg-transparent border-dark"><b><?php echo htmlspecialchars($row["name"]); ?></b></div>
                 <div class="card-body text-dark">
                     <h6 class="card-title">X: <?php echo $row["x"]; ?> <?php echo $row["y"] == null ? "" : "Y: " . $row["y"]; ?> Z: <?php echo $row["z"]; ?></h6>
-                    <p class="card-text">Description: <?php echo $row["description"]; ?></p>
+                    <p class="card-text">Description: <?php echo htmlspecialchars($row["description"]); ?></p>
                     <?php if (isset($row["distance"])) : ?>
                         <p class="card-text">Distance: <?php echo round($row["distance"]); ?></p>
                     <?php endif; ?>
