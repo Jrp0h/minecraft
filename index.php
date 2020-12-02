@@ -105,7 +105,7 @@ ORDER BY poi.created_at DESC;");
                             <?php echo $row["world"]; ?> -- <?php echo $row["category"]; ?>
                         </div>
                         <div class="col text-right">
-                            HAJ HAJ
+                            <?php echo $row["user_mc_username"] . "/" . $row["user_dc_username"]; ?>
                         </div>
                     </div>
                 </div>
