@@ -3,7 +3,11 @@ include_once "./includes/validation.php";
 include_once "./includes/database.php";
 
 $db = new Database();
-$result = $db->query("SELECT * FROM points_of_interest");
+$result = $db->query("SELECT poi.*, users.dc_username AS user_dc_username, users.mc_username AS user_mc_username
+FROM points_of_interest AS poi
+INNER JOIN users
+ON poi.user_id = users.id
+ORDER BY poi.created_at DESC;");
 ?>
 
 
@@ -37,79 +41,79 @@ $result = $db->query("SELECT * FROM points_of_interest");
 
     <!-- Container for all Content -->
 
-        <!-- Search Container -->
-        <div class="container" id="inner-container">
-            <h2>Filter</h2>
-            <div class="row">
-                <div class="col-lg-3">
-                    <!-- Input X Position -->
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">X</span>
-                        </div>
-                        <input type="text" class="form-control" placeholder="-216">
+    <!-- Search Container -->
+    <div class="container" id="inner-container">
+        <h2>Filter</h2>
+        <div class="row">
+            <div class="col-lg-3">
+                <!-- Input X Position -->
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">X</span>
                     </div>
-                </div>
-
-                <div class="col-lg-3">
-                    <!-- Input Z Position -->
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">Z</span>
-                        </div>
-                        <input type="text" class="form-control" placeholder="900">
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <!-- Droppdown with worlds -->
-                    <select class="form-control mb-3">
-                        <option>Select World</option>
-                        <option>------------</option>
-                        <option>Overworld</option>
-                        <option>Nether</option>
-                        <option>End</option>
-                    </select>
-                </div>
-                <div class="col-lg-3">
-                    <!-- Droppdown for locations types -->
-                    <select class="form-control mb-3">
-                        <option>Select Category</option>
-                        <option>------------</option>
-                        <option>Home</option>
-                        <option>Biome</option>
-                        <option>Spawner</option>
-                        <option>Temple</option>
-                        <option>Misc</option>
-                    </select>
+                    <input type="text" class="form-control" placeholder="-216">
                 </div>
             </div>
 
-            <button class="btn btn-light mb-4" type="button">Search</button>
-
-            <!--Flöde Point of Interest-->
-            <h2>Points of interest</h2>
-            <?php foreach ($result as $key => $row) :  ?>
-                <div class="card border-dark mb-3 card-coords" style="max-width: 100%;">
-                    <div class="card-header bg-transparent border-dark"><b><?php echo $row["name"]; ?></b></div>
-                    <div class="card-body text-dark">
-                        <h6 class="card-title">X: <?php echo $row["x"]; ?> <?php echo $row["y"] == null ? "" : "Y: " . $row["y"]; ?> Z: <?php echo $row["z"]; ?></h6>
-                        <p class="card-text">Description: <?php echo $row["description"]; ?></p>
+            <div class="col-lg-3">
+                <!-- Input Z Position -->
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Z</span>
                     </div>
-                    <div class="card-footer bg-transparent border-dark">
-                        <div class="row">
-                            <div class="col">
-                                <?php echo $row["world"]; ?> -- <?php echo $row["category"]; ?>
-                            </div>
-                            <div class="col text-right">
-                                HAJ HAJ
-                            </div>
-                        </div>                    
-                    </div>
+                    <input type="text" class="form-control" placeholder="900">
                 </div>
-            <?php endforeach; ?>
+            </div>
+            <div class="col-lg-3">
+                <!-- Droppdown with worlds -->
+                <select class="form-control mb-3">
+                    <option>Select World</option>
+                    <option>------------</option>
+                    <option>Overworld</option>
+                    <option>Nether</option>
+                    <option>End</option>
+                </select>
+            </div>
+            <div class="col-lg-3">
+                <!-- Droppdown for locations types -->
+                <select class="form-control mb-3">
+                    <option>Select Category</option>
+                    <option>------------</option>
+                    <option>Home</option>
+                    <option>Biome</option>
+                    <option>Spawner</option>
+                    <option>Temple</option>
+                    <option>Misc</option>
+                </select>
+            </div>
         </div>
 
-        <script src="scripts/main.js" async defer></script>
+        <button class="btn btn-light mb-4" type="button">Search</button>
+
+        <!--Flöde Point of Interest-->
+        <h2>Points of interest</h2>
+        <?php foreach ($result as $key => $row) :  ?>
+            <div class="card border-dark mb-3 card-coords" style="max-width: 100%;">
+                <div class="card-header bg-transparent border-dark"><b><?php echo $row["name"]; ?></b></div>
+                <div class="card-body text-dark">
+                    <h6 class="card-title">X: <?php echo $row["x"]; ?> <?php echo $row["y"] == null ? "" : "Y: " . $row["y"]; ?> Z: <?php echo $row["z"]; ?></h6>
+                    <p class="card-text">Description: <?php echo $row["description"]; ?></p>
+                </div>
+                <div class="card-footer bg-transparent border-dark">
+                    <div class="row">
+                        <div class="col">
+                            <?php echo $row["world"]; ?> -- <?php echo $row["category"]; ?>
+                        </div>
+                        <div class="col text-right">
+                            HAJ HAJ
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+
+    <script src="scripts/main.js" async defer></script>
 </body>
 
 </html>
