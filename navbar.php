@@ -28,9 +28,10 @@
                 <?php else : ?>
                     <li class="nav-item"><a class="nav-link" href="coords.php">Add Coords / </a></li>
                     <li class="nav-item"><a class="nav-link" href="signout.php">Sign Out / </a></li>
-                    <li class="nav-item"><a class="btn btn-light btn-sm mt-1 btn-nav" href="">
+                    <li class="nav-item">
+                        <a class="btn btn-light btn-sm mt-1 btn-nav" href="shoppingcart.php">
                             <i class="fa fa-shopping-cart"></i>
-                            <span class="badge badge-light">0</span>
+                            <span class="badge badge-light">8</span>
                         </a>
                     </li>
                 <?php endif; ?>

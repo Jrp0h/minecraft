@@ -47,6 +47,7 @@
                     <th>Price</th>
                     <th>Amount</th>
                     <th>Total</th>
+                    <th>Location</th>
                 </tr>
             </thead>
             <tbody>
@@ -54,7 +55,7 @@
                     <td>Mending</td>
                     <td>
                         <div class="side-by-side">
-                            <img src="/images/emerald.png" width="20" height="20">
+                            <img src="/images/items/emerald.png" width="20" height="20">
                             <p>12</p>
                         </div>
                     </td>
@@ -71,16 +72,17 @@
                     </td>
                     <td>
                         <div class="side-by-side">
-                            <img src="/images/emerald.png" width="20" height="20">
+                            <img src="/images/items/emerald.png" width="20" height="20">
                             <p>24</p>
                         </div>
                     </td>
+                    <td>Fannie</td>
                 </tr>
                 <tr>
                     <td>Efficiency V</td>
                     <td>
                         <div class="side-by-side">
-                            <img src="/images/emerald.png" width="20" height="20">
+                            <img src="/images/items/emerald.png" width="20" height="20">
                             <p>64</p>
                         </div>
                     </td>
@@ -97,21 +99,30 @@
                     </td>
                     <td>
                         <div class="side-by-side">
-                            <img src="/images/emerald.png" width="20" height="20">
+                            <img src="/images/items/emerald.png" width="20" height="20">
                             <p>64</p>
                         </div>
                     </td>
+                    <td>Marcus</td>
                 </tr>
             </tbody>
         </table>
 
         <hr>
 
-        <p>Total Price: <div class="side-by-side">
-                <img src="/images/emerald.png" width="20" height="20">
+        <p>Total Price:</p>
+
+        <div class="side-by-side">
+            <div class="side-by-side">
+                <img src="/images/items/emerald.png" width="20" height="20">
                 <b style="margin-left: 0.5rem;">88</b>
             </div>
-        </p>
+            <p style="margin: 0px 0.5rem;">and</p>
+            <div class="side-by-side">
+                <img src="/images/items/book.png" width="20" height="20">
+                <b style="margin-left: 0.5rem;">3</b>
+            </div>
+        </div>
     </div>
 
     <script src="scripts/main.js"></script>

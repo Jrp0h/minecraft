@@ -89,5 +89,6 @@ h2 {
         width: 100%;
         padding: 1rem;
         margin-top: 0px;
+        min-height: 100vh;
     }
 }

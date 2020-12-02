@@ -66,7 +66,7 @@ while (isset($_POST["submit"])) {
                     <input type="text" class="form-control" id="username" name="username" placeholder="Epic_gamer43">
                 </div>
                 <div class="form-group">
-                    <label for="paord">Password</label>
+                    <label for="password">Password</label>
                     <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                 </div>
                 <input type="submit" class="btn btn-light mt-3" value="Login" name="submit">
