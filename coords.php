@@ -2,8 +2,10 @@
 include_once "./includes/validation.php";
 include_once "./includes/database.php";
 require_once "./includes/auth.php";
+require_once "./includes/notification.php";
 
 if (!Auth::isLoggedIn()) {
+    Notification::warning("You must be logged in too add coords");
     header("Location: login.php");
     die();
 }
@@ -42,13 +44,15 @@ if (isset($_POST["submit"])) {
         $errors["name"] = ("You need to put in a location name");
     }
 
-    $db = new Database();
     if (count($errors) <= 0) {
+        $db = new Database();
         $looted = 0;
 
         if (isset($_POST["looted"])) {
             $looted = intval($_POST["looted"] == "on");
         }
+
+        print_r($_POST["category"]);
 
         $db->exec("INSERT INTO points_of_interest (user_id, name, x, y, z, looted, description, world, category) VALUES (:user_id, :name, :x, :y, :z, :looted, :description, :world, :category)",
             [
@@ -63,7 +67,9 @@ if (isset($_POST["submit"])) {
                 "category" => $_POST["category"]
             ]);
 
+        Notification::success("Coords successfully added");
         header("Location: index.php");
+        die();
     }
 }
 ?>
@@ -87,6 +93,8 @@ if (isset($_POST["submit"])) {
 <body>
 
     <?php require('navbar.php'); ?>
+
+    <?php require('notifications.php'); ?>
 
         <div class="container" id="inner-container">
             <h2>Add Point of Interest</h2>

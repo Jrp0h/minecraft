@@ -38,6 +38,8 @@
 <body>
     <?php require('navbar.php'); ?>
 
+    <?php require('notifications.php'); ?>
+
     <div class="container" id="inner-container">
         <h2>Cart</h2>
         <table class="table">

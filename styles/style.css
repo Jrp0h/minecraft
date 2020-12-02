@@ -83,18 +83,26 @@ h2 {
 } */
 
 .notification {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     max-width: 75vw;
     width: 100%;
     margin: 0px auto;
     margin-top: 2rem;
     margin-bottom: -2rem;
-    padding: 25px;
+    padding: 15px 25px;
     background-color: rgba(0, 0, 0, 0.5);
+
 }
 
 .notification p {
     padding: 0px;
     margin:0px;
+}
+
+.notification i {
+    cursor: pointer;
 }
 
 .notification-info {
@@ -117,12 +125,30 @@ h2 {
     color: #856404;
 }
 
+
 @media only screen and (max-width: 990px) {
     .container {
         max-width: 100%;
         width: 100%;
         padding: 1rem;
         margin-top: 0px;
-        min-height: 100vh;
+        min-height: calc(100vh - 56px); /* 56px is the navbars height */
     }
+
+    .notification {
+        max-width: 100%;
+        width: 100%;
+        padding: 1rem;
+        margin: 0px;
+
+    }
+}
+
+/* Just for shits and giggles */
+.notification-hide {
+    transition: all ease-in-out 1s;
+    height: 0px;
+    color: rgba(0,0,0,0.0);
+    padding-top: 0px;
+    padding-bottom: 0px;
 }

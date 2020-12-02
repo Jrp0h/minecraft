@@ -81,9 +81,6 @@ $queries = [
 ];
 
 
-
-
-
 $worlds = ["Overworld", "Nether", "End"];
 $categories = ["Home", "Biome", "Temple", "Spawner", "Misc"];
 
@@ -92,19 +89,18 @@ $errors = [];
 
 $params = [];
 
-
 if (isset($_GET["search"])) {
 
     if (isset($_GET["world"]) && $_GET["world"] != "") {
         if (!in_array($_GET["world"], $worlds)) {
-            $errors["world"] = "You need to choose one of the three options";
+            $errors["world"] = "Invalid option";
         }
         $params["world"] = $_GET["world"];
         $value += 1;
     }
     if (isset($_GET["category"]) && $_GET["category"] != "") {
         if (!in_array($_GET["category"], $categories)) {
-            $errors["category"] = "You need to choose one of the options";
+            $errors["category"] = "Invalid option";
         }
         $params["category"] = $_GET["category"];
         $value += 2;
@@ -123,7 +119,7 @@ if (isset($_GET["search"])) {
     if (isset($_GET["z"]) && $_GET["z"] != "") {
         $zExists = true;
         if (!Validator::isNumber($_GET["z"])) {
-            $errors["z"] = "z must be a number";
+            $errors["z"] = "Z must be a number";
         }
         $z = $_GET["z"];
         $params["z"] = $_GET["z"];
@@ -132,17 +128,18 @@ if (isset($_GET["search"])) {
     if ($xExists || $zExists) {
         // X set but not Z
         if ($xExists && !$zExists) {
-            $errors["z"] = "Need a value";
+            $errors["z"] = "Z is needed to calculate distance";
         } elseif ($zExists && !$xExists) {
-            $errors["x"] = "Need a value";
-        } else {
-            $value += 4;
-        }
+            $errors["x"] = "X is needed to calculate distance";
+        } 
+
+		$value += 4;
     }
 
     if ($value == 4 || $value == 6) {
-        $errors["world"] = "World is reguired to get position";
+        $errors["world"] = "World is required to calculate distance";
     }
+
     if (count($errors) > 0) {
         $value = 0;
         $params = [];
@@ -183,19 +180,8 @@ $result = $db->query($queries[$value], $params);
 <body>
     <?php require('navbar.php'); ?>
 
-	<div class="notification notification-success">
-		<p>Coords successfully added</p>	
-</div>
-	<div class="notification notification-info">
-		<p>Coords successfully added</p>	
-</div>
+    <?php require('notifications.php'); ?>
 
-	<div class="notification notification-danger">
-		<p>Coords successfully added</p>	
-</div>
-	<div class="notification notification-warning">
-		<p>Coords successfully added</p>	
-</div>
     <!-- Container for all Content -->
     <!-- Search Container -->
     <div class="container" id="inner-container">
@@ -209,7 +195,7 @@ $result = $db->query($queries[$value], $params);
                             <div class="input-group-prepend">
                                 <span class="input-group-text">X</span>
                             </div>
-                            <input name="x" type="text" class="form-control" placeholder="-216">
+							<input name="x" type="text" class="form-control" placeholder="-216" value="<?php echo isset($_GET['x']) ? $_GET['x'] : ""; ?>">
                         </div>
                     </div>
 
@@ -218,13 +204,15 @@ $result = $db->query($queries[$value], $params);
                     <div class="col-lg-3">
                         <!-- Input X Position -->
                         <div class="form-group">
-                            <div class="input-group mb-3">
+                            <div class="input-group mb-1">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">X</span>
                                 </div>
-                                <input name="x" type="text" class="form-control" placeholder="-216">
+                                <input name="x" type="text" class="form-control is-invalid" placeholder="-216">
                             </div>
-                            <small class="text-danger">You need to have a X coord aswell</small>
+                            <small class="text-danger">
+                                <?php echo $errors["x"]; ?>
+                            </small>
                         </div>
                     </div>
                 <?php endif; ?>
@@ -237,20 +225,22 @@ $result = $db->query($queries[$value], $params);
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Z</span>
                             </div>
-                            <input name="z" type="text" class="form-control" placeholder="900">
+                            <input name="z" type="text" class="form-control" placeholder="900" value="<?php echo isset($_GET['z']) ? $_GET['z'] : ""; ?>" >
                         </div>
                     </div>
                 <?php else : ?>
                     <div class="col-lg-3">
                         <!-- Input Z Position -->
                         <div clas="form-group">
-                            <div class="input-group mb-3">
+                            <div class="input-group mb-1">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Z</span>
                                 </div>
-                                <input name="z" type="text" class="form-control" placeholder="900">
+                                <input name="z" type="text" class="form-control is-invalid" placeholder="900">
                             </div>
-                            <small class="text-danger">You need to have a Z coord aswell</small>
+                            <small class="text-danger">
+                                <?php echo $errors["z"]; ?>
+                            </small>
                         </div>
                     </div>
                 <?php endif; ?>
@@ -279,7 +269,7 @@ $result = $db->query($queries[$value], $params);
                                 <option value="">Select World</option>
                                 <option value="">------------</option>
                                 <?php foreach ($worlds as $w) : ?>
-                                    <option <?php echo isset($_POST["world"]) && $_POST["world"] == $w ? "selected" : ""; ?> value="<?php echo $w; ?>"><?php echo $w; ?></option>
+                                    <option <?php echo isset($_GET["world"]) && $_GET["world"] == $w ? "selected" : ""; ?> value="<?php echo $w; ?>"><?php echo $w; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -311,7 +301,7 @@ $result = $db->query($queries[$value], $params);
                                 <option value="">Select Category</option>
                                 <option value="">------------</option>
                                 <?php foreach ($categories as $c) : ?>
-                                    <option <?php echo isset($_POST["category"]) && $_POST["category"] == $c ? "selected" : ""; ?> value="<?php echo $c; ?>"><?php echo $c; ?></option>
+                                    <option <?php echo isset($_GET["category"]) && $_GET["category"] == $c ? "selected" : ""; ?> value="<?php echo $c; ?>"><?php echo $c; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>

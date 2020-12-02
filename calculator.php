@@ -22,7 +22,7 @@
 
     <?php require('navbar.php'); ?>
 
-
+    <?php require('notifications.php'); ?>
 
     <!-- <div class="container mt-2"> -->
     <div class="container" id="inner-container">

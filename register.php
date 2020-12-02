@@ -2,6 +2,7 @@
 require_once "./includes/validation.php";
 require_once "./includes/database.php";
 require_once "./includes/auth.php";
+require_once "./includes/notification.php";
 
 if (Auth::isLoggedIn()) {
     header("Location: index.php");
@@ -65,7 +66,9 @@ if (isset($_POST["submit"])) {
             ]
         );
 
+        Notification::success("You've been registered successfully, you can now sign in");
         header("Location: login.php");
+        die();
     }
 }
 
@@ -90,6 +93,9 @@ if (isset($_POST["submit"])) {
 
 <body>
     <?php require('navbar.php'); ?>
+
+    <?php require('notifications.php'); ?>
+
         <div class="container" id="inner-container">
                 <h2>Register</h2>
                 <form action="register.php" method="POST">

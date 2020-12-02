@@ -2,35 +2,38 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+
 include_once "./includes/database.php";
 include_once "./includes/auth.php";
+include_once "./includes/notification.php";
 
 if (Auth::isLoggedIn()) {
     header("Location: index.php");
     die();
 }
 
-$errors = false;
-
 while (isset($_POST["submit"])) {
     $db = new Database();
-    $save = $db->query("SELECT * FROM users WHERE mc_username = :username OR dc_username  = :username", ["username" => $_POST["username"]]);
-    if (count($save) != 1) {
-        $errors = true;
-        break;
-    }
-    $save = $save[0];
+    $result = $db->query("SELECT * FROM users WHERE mc_username = :username OR dc_username  = :username", ["username" => $_POST["username"]]);
 
-    if (!password_verify($_POST["password"], $save["password"])) {
-        $errors = true;
+    if (count($result) != 1) {
+        Notification::danger("Invalid username/password");
         break;
     }
-    $_SESSION["user_id"] = $save["id"];
+
+    $user = $result[0];
+
+    if (!password_verify($_POST["password"], $user["password"])) {
+        Notification::danger("Invalid username/password");
+        break;
+    }
+
+    $_SESSION["user_id"] = $user["id"];
+    Notification::info("You've been logged in");
     header("Location: index.php");
+    die();
     break;
 }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -53,13 +56,12 @@ while (isset($_POST["submit"])) {
 
 <body>
     <?php require('navbar.php'); ?>
+
+    <?php require('notifications.php'); ?>
+
         <div class="container" id="inner-container">
             <h2>Login</h2>
-            <?php if ($errors) : ?>
-                <p class="text-danger">
-                    Invalid password/username
-                </p>
-            <?php endif; ?>
+
             <form method="POST">
                 <div class="form-group">
                     <label for="username">Minecraft or Discord Username</label>
