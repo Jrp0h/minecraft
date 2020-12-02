@@ -8,6 +8,66 @@ FROM points_of_interest AS poi
 INNER JOIN users
 ON poi.user_id = users.id
 ORDER BY poi.created_at DESC;");
+
+$value = 0;
+
+$worlds = ["Overworld", "Nether", "End"];
+$categories = ["Home", "Biome", "Temple", "Spawner", "Misc"];
+
+$errors = [];
+
+if (isset($_GET["search"])) {
+
+    if (isset($_GET["world"]) && $_GET["world"] != "") {
+        if (!in_array($_GET["world"], $worlds)) {
+            $errors["world"] = "You need to choose one of the three options";
+        }
+        $value += 1;
+    }
+    if (isset($_GET["category"]) && $_GET["category"] != "") {
+        if (!in_array($_GET["category"], $categories)) {
+            $errors["category"] = "You need to choose one of the options";
+        }
+        $value += 2;
+    }
+
+    $xExists = false;
+    $zExists = false;
+
+    if (isset($_GET["x"]) && $_GET["x"] != "") {
+        $xExists = true;
+        if (!Validator::isNumber($_GET["x"])) {
+            $errors["x"] = "X must be a number";
+        }
+    }
+    if (isset($_GET["z"]) && $_GET["z"] != "") {
+        $zExists = true;
+        if (!Validator::isNumber($_GET["z"])) {
+            $errors["z"] = "z must be a number";
+        }
+    }
+
+    if ($xExists || $zExists) {
+        // X set but not Z
+        if ($xExists && !$zExists) {
+            $errors["z"] = "Need a value";
+        } elseif ($zExists && !$xExists) {
+            $errors["x"] = "Need a value";
+        } else {
+            $value += 4;
+        }
+    }
+
+    if ($value == 4 || $value == 6) {
+        $errors["world"] = "World is reguired to get position";
+    }
+    if (count($errors) > 0) {
+        $value = 0;
+    }
+}
+
+
+
 ?>
 
 
@@ -40,82 +100,84 @@ ORDER BY poi.created_at DESC;");
     <?php require('navbar.php'); ?>
 
     <!-- Container for all Content -->
-
     <!-- Search Container -->
     <div class="container" id="inner-container">
-        <h2>Filter</h2>
-        <div class="row">
-            <div class="col-lg-3">
-                <!-- Input X Position -->
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">X</span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="-216">
-                </div>
-            </div>
-
-            <div class="col-lg-3">
-                <!-- Input X Position -->
-                <div class="form-group">
+        <form method="GET">
+            <h2>Filter</h2>
+            <div class="row">
+                <div class="col-lg-3">
+                    <!-- Input X Position -->
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text">X</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="-216">
-                        <small class="text-danger">You need to have a X coord aswell</small>
+                        <input name="x" type="text" class="form-control" placeholder="-216">
                     </div>
                 </div>
-            </div>
 
-            <div class="col-lg-3">
-                <!-- Input Z Position -->
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Z</span>
+                <div class="col-lg-3">
+                    <!-- Input X Position -->
+                    <div class="form-group">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">X</span>
+                            </div>
+                            <input name="x" type="text" class="form-control" placeholder="-216">
+                            <small class="text-danger">You need to have a X coord aswell</small>
+                        </div>
                     </div>
-                    <input type="text" class="form-control" placeholder="900">
                 </div>
-            </div>
 
-            <div class="col-lg-3">
-                <!-- Input Z Position -->
-                <div clas="form-group">
+                <div class="col-lg-3">
+                    <!-- Input Z Position -->
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text">Z</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="900">
-                        <small class="text-danger">You need to have a Z coord aswell</small>
+                        <input name="z" type="text" class="form-control" placeholder="900">
                     </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <!-- Input Z Position -->
+                    <div clas="form-group">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Z</span>
+                            </div>
+                            <input name="z" type="text" class="form-control" placeholder="900">
+                            <small class="text-danger">You need to have a Z coord aswell</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <!-- Droppdown with worlds -->
+                    <select name="world" class="form-control mb-3">
+                        <option value="">Select World</option>
+                        <option value="">------------</option>
+                        <option>Overworld</option>
+                        <option>Nether</option>
+                        <option>End</option>
+                    </select>
+                </div>
+                <div class="col-lg-3">
+                    <!-- Droppdown for locations types -->
+                    <select name="category" class="form-control mb-3">
+                        <option value="">Select Category</option>
+                        <option value="">------------</option>
+                        <option>Home</option>
+                        <option>Biome</option>
+                        <option>Spawner</option>
+                        <option>Temple</option>
+                        <option>Misc</option>
+                    </select>
                 </div>
             </div>
 
-            <div class="col-lg-3">
-                <!-- Droppdown with worlds -->
-                <select class="form-control mb-3">
-                    <option>Select World</option>
-                    <option>------------</option>
-                    <option>Overworld</option>
-                    <option>Nether</option>
-                    <option>End</option>
-                </select>
-            </div>
-            <div class="col-lg-3">
-                <!-- Droppdown for locations types -->
-                <select class="form-control mb-3">
-                    <option>Select Category</option>
-                    <option>------------</option>
-                    <option>Home</option>
-                    <option>Biome</option>
-                    <option>Spawner</option>
-                    <option>Temple</option>
-                    <option>Misc</option>
-                </select>
-            </div>
-        </div>
 
-        <button class="btn btn-light mb-4" type="button">Search</button>
+            <input type="submit" class="btn btn-light mb-4" value="Search" name="search">
+        </form>
 
         <!--Flöde Point of Interest-->
         <h2>Points of interest</h2>
