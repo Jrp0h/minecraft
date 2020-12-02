@@ -183,6 +183,19 @@ $result = $db->query($queries[$value], $params);
 <body>
     <?php require('navbar.php'); ?>
 
+	<div class="notification notification-success">
+		<p>Coords successfully added</p>	
+</div>
+	<div class="notification notification-info">
+		<p>Coords successfully added</p>	
+</div>
+
+	<div class="notification notification-danger">
+		<p>Coords successfully added</p>	
+</div>
+	<div class="notification notification-warning">
+		<p>Coords successfully added</p>	
+</div>
     <!-- Container for all Content -->
     <!-- Search Container -->
     <div class="container" id="inner-container">

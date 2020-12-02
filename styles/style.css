@@ -82,6 +82,40 @@ h2 {
     color: red;
 } */
 
+.notification {
+    max-width: 75vw;
+    width: 100%;
+    margin: 0px auto;
+    margin-top: 2rem;
+    margin-bottom: -2rem;
+    padding: 25px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.notification p {
+    padding: 0px;
+    margin:0px;
+}
+
+.notification-info {
+    background-color: rgba(193, 229, 236 ,0.75);
+    color: #0C5460;
+}
+
+.notification-success {
+    background-color: rgba(197, 231, 205 ,0.75);
+    color: #155724;
+}
+
+.notification-danger {
+    background-color: rgba(245, 201, 205, 0.75);
+    color: #721c24;
+}
+
+.notification-warning {
+    background-color: rgba(255, 239, 188, 0.75);
+    color: #856404;
+}
 
 @media only screen and (max-width: 990px) {
     .container {
