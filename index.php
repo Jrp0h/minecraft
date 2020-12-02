@@ -8,6 +8,85 @@ FROM points_of_interest AS poi
 INNER JOIN users
 ON poi.user_id = users.id
 ORDER BY poi.created_at DESC;");
+
+
+$queries = [
+    // 0 - Default 
+    "SELECT 
+	points_of_interest.*,
+	users.dc_username AS user_dc_username,
+	users.mc_username AS user_mc_username
+	FROM points_of_interest
+	INNER JOIN users
+	ON points_of_interest.user_id = users.id
+	ORDER BY created_at DESC;",
+
+    // 1 - World only
+    "SELECT 
+	points_of_interest.*,
+	users.dc_username AS user_dc_username,
+	users.mc_username AS user_mc_username
+	FROM points_of_interest
+	INNER JOIN users 
+	ON points_of_interest.user_id = users.id
+	WHERE world = :world
+    ORDER BY created_at DESC;",
+
+    // 2 - Category only
+    "SELECT 
+	points_of_interest.*,
+	users.dc_username AS user_dc_username,
+	users.mc_username AS user_mc_username
+	FROM points_of_interest
+	INNER JOIN users 
+	ON points_of_interest.user_id = users.id
+	WHERE category = :category
+    ORDER BY created_at DESC;",
+
+    // 3 - World and Category
+    "SELECT 
+	points_of_interest.*,
+	users.dc_username AS user_dc_username,
+	users.mc_username AS user_mc_username
+	FROM points_of_interest
+	INNER JOIN users 
+	ON points_of_interest.user_id = users.id
+	WHERE world = :world
+	AND category = :category
+    ORDER BY created_at DESC;",
+    
+    // 4 - Position only (INVALID)
+    "",
+
+    // 5 - Position and World
+    "SELECT 
+	points_of_interest.*,
+	users.dc_username AS user_dc_username,
+	users.mc_username AS user_mc_username,
+	SQRT(((x - :x)*(x - :x) + (z - :z)*(z - :z))) AS distance
+	FROM points_of_interest 
+	INNER JOIN users 
+	ON points_of_interest.user_id = users.id
+	WHERE world = :world
+    ORDER BY distance;",
+
+    // 6 - Position and Category (INVALID)
+    "",
+
+    // 7 - Position, World and Category
+    "SELECT 
+	points_of_interest.*,
+	users.dc_username AS user_dc_username,
+	users.mc_username AS user_mc_username,
+	SQRT(((x - :x)*(x - :x) + (z - :z)*(z - :z))) AS distance
+	FROM points_of_interest 
+	INNER JOIN users 
+	ON points_of_interest.user_id = users.id
+	WHERE world = :world
+    AND category = :category
+    ORDER BY distance;",
+];
+
 ?>
 
 
