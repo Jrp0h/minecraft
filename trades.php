@@ -21,6 +21,22 @@
     <link rel="icon" type="image/png" href="/favicon/favicon.ico" />
 
     <link rel="stylesheet" href="/styles/style.css">
+    <style>
+        .side-by-side {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .side-by-side p {
+            margin: 0 1rem;
+        }
+
+        th,
+        td {
+            color: white;
+        }
+    </style>
 </head>
 
 <body>
@@ -33,58 +49,152 @@
     <div class="container" id="inner-container">
         <!--Flöde Enchantments-->
         <h2>Enchantments</h2>
-        <div class="card border-dark mb-2 pt-3 card-coords">
-            <div class="card-body bg-transparent border-dark">
-                <div class="row">
-                    <div class="col-lg-2 pt-3">
-                        <h6>Looting II</h6>
-                    </div>
-                    <div class="col-lg-3 text-center">
-                        <img src="/images/items/emerald.png" width="20" height="20">
-                        <p>12</p>
-                    </div>
-                    <div class="col-lg-1 pt-1">
-                        <h6>+</h6>
-                    </div>
-                    <div class="col-lg-3 text-center">
-                        <img src="/images/items/book.png" width="20" height="20">
-                        <p>1</p>
-                    </div>
-                    <div class="col-lg-3 text-right pt-2">
-                        <a href="" class="btn btn-dark" value="addToCart">Add to Cart</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-3">
-                <div class="card border-dark mb-3 card-coords">
-                    <div class="card-body bg-transparent border-dark">
-                        <p>Looting II</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="card border-dark mb-3 card-coords">
-                    <div class="card-body bg-transparent border-dark">
-                        <p>Looting II</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 ">
-                <div class="card border-dark mb-3 card-coords">
-                    <div class="card-body bg-transparent border-dark">
-                        <p>Looting II</p>
-                    </div>
 
+        <div class="custom-grid">
+
+            <div class="card border-dark mb-3 card-coords" style="max-width: 100%;">
+                <div class="card-header bg-transparent border-dark">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <b>Looting II</b>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body text-dark">
+                    <div class="side-by-side">
+                        <div class="side-by-side">
+                            <img src="/images/items/emerald.png" width="20" height="20">
+                            <b style="margin-left: 0.5rem;">12</b>
+                        </div>
+                        <p style="margin: 0px 0.5rem;">and</p>
+                        <div class="side-by-side">
+                            <img src="/images/items/book.png" width="20" height="20">
+                            <b style="margin-left: 0.5rem;">1</b>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer bg-transparent border-dark">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <a href="#" class="btn btn-dark">Add to Cart</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-lg-3 ">
-                <div class="card border-dark mb-3 card-coords">
-                    <div class="card-body bg-transparent border-dark">
-                        <p>Looting II</p>
+            <div class="card border-dark mb-3 card-coords" style="max-width: 100%;">
+                <div class="card-header bg-transparent border-dark">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <b>Looting II</b>
+                        </div>
                     </div>
-
+                </div>
+                <div class="card-body text-dark">
+                    <div class="side-by-side">
+                        <div class="side-by-side">
+                            <img src="/images/items/emerald.png" width="20" height="20">
+                            <b style="margin-left: 0.5rem;">12</b>
+                        </div>
+                        <p style="margin: 0px 0.5rem;">and</p>
+                        <div class="side-by-side">
+                            <img src="/images/items/book.png" width="20" height="20">
+                            <b style="margin-left: 0.5rem;">1</b>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer bg-transparent border-dark">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <a href="#" class="btn btn-dark">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card border-dark mb-3 card-coords" style="max-width: 100%;">
+                <div class="card-header bg-transparent border-dark">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <b>Looting II</b>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body text-dark">
+                    <div class="side-by-side">
+                        <div class="side-by-side">
+                            <img src="/images/items/emerald.png" width="20" height="20">
+                            <b style="margin-left: 0.5rem;">12</b>
+                        </div>
+                        <p style="margin: 0px 0.5rem;">and</p>
+                        <div class="side-by-side">
+                            <img src="/images/items/book.png" width="20" height="20">
+                            <b style="margin-left: 0.5rem;">1</b>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer bg-transparent border-dark">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <a href="#" class="btn btn-dark">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card border-dark mb-3 card-coords" style="max-width: 100%;">
+                <div class="card-header bg-transparent border-dark">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <b>Looting II</b>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body text-dark">
+                    <div class="side-by-side">
+                        <div class="side-by-side">
+                            <img src="/images/items/emerald.png" width="20" height="20">
+                            <b style="margin-left: 0.5rem;">12</b>
+                        </div>
+                        <p style="margin: 0px 0.5rem;">and</p>
+                        <div class="side-by-side">
+                            <img src="/images/items/book.png" width="20" height="20">
+                            <b style="margin-left: 0.5rem;">1</b>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer bg-transparent border-dark">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <a href="#" class="btn btn-dark">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card border-dark mb-3 card-coords" style="max-width: 100%;">
+                <div class="card-header bg-transparent border-dark">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <b>Looting II</b>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body text-dark">
+                    <div class="side-by-side">
+                        <div class="side-by-side">
+                            <img src="/images/items/emerald.png" width="20" height="20">
+                            <b style="margin-left: 0.5rem;">12</b>
+                        </div>
+                        <p style="margin: 0px 0.5rem;">and</p>
+                        <div class="side-by-side">
+                            <img src="/images/items/book.png" width="20" height="20">
+                            <b style="margin-left: 0.5rem;">1</b>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer bg-transparent border-dark">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <a href="#" class="btn btn-dark">Add to Cart</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

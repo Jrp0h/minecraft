@@ -125,6 +125,23 @@ h2 {
     color: #856404;
 }
 
+.custom-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 30px;
+}
+
+@media only screen and (max-width: 1600px) {
+    .custom-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+@media only screen and (max-width: 1300px) {
+    .custom-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
 
 @media only screen and (max-width: 990px) {
     .container {
@@ -141,6 +158,10 @@ h2 {
         padding: 1rem;
         margin: 0px;
 
+    }
+
+    .custom-grid {
+        grid-template-columns: 1fr;
     }
 }
 
