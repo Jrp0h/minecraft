@@ -1,6 +1,7 @@
 <?php
 include_once "./includes/validation.php";
 include_once "./includes/database.php";
+require_once "./includes/auth.php";
 
 
 $queries = [
@@ -131,9 +132,9 @@ if (isset($_GET["search"])) {
             $errors["z"] = "Z is needed to calculate distance";
         } elseif ($zExists && !$xExists) {
             $errors["x"] = "X is needed to calculate distance";
-        } 
+        }
 
-		$value += 4;
+        $value += 4;
     }
 
     if ($value == 4 || $value == 6) {
@@ -178,6 +179,7 @@ $result = $db->query($queries[$value], $params);
 </head>
 
 <body>
+
     <?php require('navbar.php'); ?>
 
     <?php require('notifications.php'); ?>
@@ -195,7 +197,7 @@ $result = $db->query($queries[$value], $params);
                             <div class="input-group-prepend">
                                 <span class="input-group-text">X</span>
                             </div>
-							<input name="x" type="text" class="form-control" placeholder="-216" value="<?php echo isset($_GET['x']) ? $_GET['x'] : ""; ?>">
+                            <input name="x" type="text" class="form-control" placeholder="-216" value="<?php echo isset($_GET['x']) ? $_GET['x'] : ""; ?>">
                         </div>
                     </div>
 
@@ -225,7 +227,7 @@ $result = $db->query($queries[$value], $params);
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Z</span>
                             </div>
-                            <input name="z" type="text" class="form-control" placeholder="900" value="<?php echo isset($_GET['z']) ? $_GET['z'] : ""; ?>" >
+                            <input name="z" type="text" class="form-control" placeholder="900" value="<?php echo isset($_GET['z']) ? $_GET['z'] : ""; ?>">
                         </div>
                     </div>
                 <?php else : ?>
@@ -318,7 +320,18 @@ $result = $db->query($queries[$value], $params);
         <h2>Points of interest</h2>
         <?php foreach ($result as $key => $row) :  ?>
             <div class="card border-dark mb-3 card-coords" style="max-width: 100%;">
-                <div class="card-header bg-transparent border-dark"><b><?php echo htmlspecialchars($row["name"]); ?></b></div>
+                <div class="card-header bg-transparent border-dark">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <b><?php echo htmlspecialchars($row["name"]); ?></b>
+                        </div>
+                        <?php if (Auth::isLoggedIn() && Auth::userId() == $row["user_id"]) : ?>
+                            <div class="col-lg-6 text-right">
+                                <a href="/coords.php?type=edit&id=<?php echo $row["id"] ?>" class="btn btn-dark">Edit</a>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
                 <div class="card-body text-dark">
                     <h6 class="card-title">X: <?php echo $row["x"]; ?> <?php echo $row["y"] == null ? "" : "Y: " . $row["y"]; ?> Z: <?php echo $row["z"]; ?></h6>
                     <p class="card-text">Description: <?php echo htmlspecialchars($row["description"]); ?></p>

@@ -20,13 +20,13 @@
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="navbar-nav ml-auto text-right">
                 <li class="nav-item"><a class="nav-link" href="index.php">Home / </a></li>
-                <li class="nav-item"><a class="nav-link" href="">Trades / </a></li>
+                <li class="nav-item"><a class="nav-link" href="trades.php">Trades / </a></li>
                 <li class="nav-item"><a class="nav-link" href="calculator.php">Calculator / </a></li>
                 <?php if (!Auth::isLoggedIn()) : ?>
                     <li class="nav-item"><a class="nav-link" href="register.php">Register /</a></li>
                     <li class="nav-item"><a class="nav-link" href="login.php">Log in / </a></li>
                 <?php else : ?>
-                    <li class="nav-item"><a class="nav-link" href="coords.php">Add Coords / </a></li>
+                    <li class="nav-item"><a class="nav-link" href="coords.php">add Coords / </a></li>
                     <li class="nav-item"><a class="nav-link" href="signout.php">Sign Out / </a></li>
                     <li class="nav-item">
                         <a class="btn btn-light btn-sm mt-1 btn-nav" href="shoppingcart.php">
