@@ -15,7 +15,9 @@ $defaultValues = [
     "y" => "",
     "z" => "",
     "name" => "",
-    "description" => ""
+    "description" => "",
+    "world" => "",
+    "category" => ""
 
 ];
 
@@ -23,14 +25,14 @@ $edit = false;
 
 if (isset($_GET["type"]) && $_GET["type"] == "edit") {
     if (!isset($_GET["id"])) {
-        Notification::danger("invalid id");
+        Notification::danger("Invalid id");
         header("Location: index.php");
         die();
     } else {
         $db = new Database();
         $poi = $db->query("SELECT * FROM points_of_interest WHERE id=:id", ["id" => $_GET["id"]]);
         if (count($poi) <= 0) {
-            Notification::danger("invalid id");
+            Notification::danger("Invalid id");
             header("Location: index.php");
             die();
         } else {
@@ -42,13 +44,15 @@ if (isset($_GET["type"]) && $_GET["type"] == "edit") {
             $defaultValues["x"] = $poi[0]["x"];
             //Y måste inte vara satt
             if ($poi[0]["y"] == null) {
-                $defaultValues["y"] = [""];
+                $defaultValues["y"] = "";
             } else {
                 $defaultValues["y"] = $poi[0]["y"];
             }
             $defaultValues["z"] = $poi[0]["z"];
             $defaultValues["name"] = $poi[0]["name"];
             $defaultValues["description"] = $poi[0]["description"];
+            $defaultValues["world"] = $poi[0]["world"];
+            $defaultValues["category"] = $poi[0]["category"];
             $edit = true;
         }
     }
@@ -81,9 +85,13 @@ if (isset($_POST["submit"])) {
 
     if (!isset($_POST["world"]) || !in_array($_POST["world"], $worlds)) {
         $errors["world"] = ("You need to choose one of the three options");
+    } else {
+        $defaultValues["world"] = $_POST["world"];
     }
     if (!isset($_POST["category"]) || !in_array($_POST["category"], $categories)) {
         $errors["category"] = ("You need to choose one of the options");
+    } else {
+        $defaultValues["world"] = $_POST["world"];
     }
     if (!isset($_POST["description"]) || $_POST["description"] == "") {
         $errors["description"] = ("You need to put in a description");
@@ -295,7 +303,7 @@ if (isset($_POST["submit"])) {
                                 <option>Select World</option>
                                 <option>------------</option>
                                 <?php foreach ($worlds as $w) : ?>
-                                    <option <?php echo isset($_POST["world"]) && $_POST["world"] == $w ? "selected" : ""; ?> value="<?php echo $w; ?>"><?php echo $w; ?></option>
+                                    <option <?php echo $defaultValues["world"] == $w ? "selected" : ""; ?> value="<?php echo $w; ?>"><?php echo $w; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -326,7 +334,7 @@ if (isset($_POST["submit"])) {
                                 <option>Select Category</option>
                                 <option>------------</option>
                                 <?php foreach ($categories as $c) : ?>
-                                    <option <?php echo isset($_POST["category"]) && $_POST["category"] == $c ? "selected" : ""; ?> value="<?php echo $c; ?>"><?php echo $c; ?></option>
+                                    <option <?php echo $defaultValues["category"] == $c ? "selected" : ""; ?> value="<?php echo $c; ?>"><?php echo $c; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
