@@ -59,3 +59,31 @@ och skriva in nether coords och får ut overworld coords
 
 Välja vilka enchantments man vill ha, det visar hur många emeralds man behöver
 och visar var alla de olika enchantments villagerna står
+
+## Notes to self(Marcus)
+
+PHP fil som tar emot en post request för att lägga till i Shopping Cart.
+Skickar med Id. Ska retunera hur många föremål man har i sin Shopping Cart.
+
+Använd fetch med credentials same-origin.
+
+Send:
+
+```javascript
+fetch("/addtocart.php", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  credentials:"same-origin",
+  body: JSON.stringify({id: "hidden val id"})
+});
+```
+
+Response:
+
+```json
+{
+  "amount": 3
+}
+```

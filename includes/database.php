@@ -14,11 +14,11 @@ class Database
     function query($query, $params = null)
     {
         if ($params == null) {
-            return $this->con->query($query)->fetchAll();
+            return $this->con->query($query)->fetchAll(PDO::FETCH_ASSOC);
         }
         $stmt = $this->con->prepare($query);
         $stmt->execute($params);
-        return $stmt->fetchAll();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     function exec($query, $params = null)
