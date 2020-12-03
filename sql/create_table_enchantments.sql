@@ -1,5 +1,5 @@
 CREATE TABLE enchantments (
-    id int (11) NOT NULL AUTO_INCREMENT UNIQUE,
+    id int (11) NOT NULL AUTO_INCREMENT,
     user_id int(11) NOT NULL,
     poi_id int(11) NOT NULL,
     price int(11) NOT NULL,
