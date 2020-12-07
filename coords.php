@@ -17,7 +17,8 @@ $defaultValues = [
     "name" => "",
     "description" => "",
     "world" => "",
-    "category" => ""
+    "category" => "",
+    "looted" => 0
 
 ];
 
@@ -53,6 +54,7 @@ if (isset($_GET["type"]) && $_GET["type"] == "edit") {
             $defaultValues["description"] = $poi[0]["description"];
             $defaultValues["world"] = $poi[0]["world"];
             $defaultValues["category"] = $poi[0]["category"];
+            $defaultValues["looted"] = $poi[0]["looted"];
             $edit = true;
         }
     }
@@ -103,6 +105,8 @@ if (isset($_POST["submit"])) {
     } else {
         $defaultValues["name"] = $_POST["name"];
     }
+    $defaultValues["looted"] = $_POST["looted"];
+
 
     if (count($errors) <= 0) {
         $db = new Database();
@@ -408,7 +412,8 @@ if (isset($_POST["submit"])) {
 
             <!-- Looted -->
             <div>
-                <input type="checkbox" class="form-check-input ml-1" name="looted">
+
+                <input type="checkbox" class="form-check-input ml-1" name="looted" <?php echo $defaultValues["looted"] ? "checked" : ""; ?>>
                 <label class="form-check-label ml-4">Looted</label>
             </div>
 
