@@ -1,14 +1,14 @@
 <?php
-    include_once "./includes/validation.php";
-    include_once "./includes/database.php";
-    require_once "./includes/auth.php";
-    require_once "./includes/notification.php";
+include_once "./includes/validation.php";
+include_once "./includes/database.php";
+require_once "./includes/auth.php";
+require_once "./includes/notification.php";
 
-    if (!Auth::isLoggedIn()) {
-        Notification::warning("You must be logged in too look at trades");
-        header("Location: login.php");
-        die();
-    }
+if (!Auth::isLoggedIn()) {
+    Notification::warning("You must be logged in too look at trades");
+    header("Location: login.php");
+    die();
+}
 ?>
 
 <!DOCTYPE html>
@@ -21,14 +21,11 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
-        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-        </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
-        </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
+    </script>
 
     <!--FontAwsome link-->
     <link rel="stylesheet" href="styles/font-awesome-4.7.0/css/font-awesome.min.css">
@@ -68,8 +65,8 @@
 
         <div class="custom-grid">
 
-<!-- for test -->
-            <?php for($i = 0; $i < 10; $i++): ?>
+            <!-- for test -->
+            <?php for ($i = 0; $i < 10; $i++) : ?>
                 <div class="card border-dark card-coords" style="max-width: 100%;">
                     <div class="card-header bg-transparent border-dark">
                         <div class="row">
@@ -100,7 +97,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <form method="POST">
-                                    <input type="submit" name="submit" class="btn btn-dark" value="Add to Cart">
+                                    <input type="submit" name="addCart" class="btn btn-dark" value="Add to Cart" id="btnAddCart">
                                     <input type="hidden" name="id" value="1">
                                 </form>
                             </div>
