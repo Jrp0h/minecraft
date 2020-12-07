@@ -20,7 +20,7 @@
     $errors = [];
 
     $defaultValues = [
-        "location" => "",
+        "location" => ["id" => ""],
         "first_item" => "",
         "first_item_amount" => "",
         "secondary_item" => "",
