@@ -162,7 +162,7 @@
                             </div>
                         </div>
                         <div class="card-text">
-                            Located: <?php echo $e["poi_name"]; ?>
+                            Located: <?php echo htmlspecialchars($e["poi_name"]); ?>
                         </div>
                     </div>
                 </div>
