@@ -309,7 +309,6 @@ $result = $db->query($queries[$value], $params);
                         </div>
                     </div>
                 <?php endif; ?>
-
             </div>
 
 
@@ -335,6 +334,9 @@ $result = $db->query($queries[$value], $params);
                 <div class="card-body text-dark">
                     <h6 class="card-title">X: <?php echo $row["x"]; ?> <?php echo $row["y"] == null ? "" : "Y: " . $row["y"]; ?> Z: <?php echo $row["z"]; ?></h6>
                     <p class="card-text">Description: <?php echo htmlspecialchars($row["description"]); ?></p>
+                    <?php if ($row["looted"]) : ?>
+                        <p class="card-text">Looted: <i class="fa fa-check-square"></i></p>
+                    <?php endif; ?>
                     <?php if (isset($row["distance"])) : ?>
                         <p class="card-text">Distance: <?php echo round($row["distance"]); ?></p>
                     <?php endif; ?>
