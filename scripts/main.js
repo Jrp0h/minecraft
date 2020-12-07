@@ -109,16 +109,19 @@ for (let i = 0; i < customDropdowns.length; i++) {
     customDropdowns[i].addEventListener("mousedown", (e) => {
         e.preventDefault();
         dropdownSearch.focus();
+
+        let box = customDropdowns[i].getBoundingClientRect()
+
+        dropdownUI.style.top = (box.y + window.scrollY + customDropdowns[i].clientHeight + 3) + "px";
+        dropdownUI.style.left = box.x + "px";
+        dropdownUI.style.width = customDropdowns[i].clientWidth + "px";
+
         if (currentDropdown == customDropdowns[i]) {
             dropdownUI.classList.toggle("hide");
             return;
         }
 
         currentDropdown = customDropdowns[i];
-
-        dropdownUI.style.top = (customDropdowns[i].offsetTop + customDropdowns[i].clientHeight + 3) + "px";
-        dropdownUI.style.left = customDropdowns[i].offsetLeft + "px";
-        dropdownUI.style.width = customDropdowns[i].clientWidth + "px";
 
         dropdownSearch.value = "";
         dropdownSearch.focus();

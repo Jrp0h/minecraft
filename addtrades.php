@@ -170,7 +170,7 @@
     <!-- DONT TOUCH!!!!! -->
     <div id="dd" class="custom-dropdown">
         <div class="custom-dropdown-search">
-            <input type="text" class="form-control" id="dd-search">
+            <input placeholder="Search" type="text" class="form-control" id="dd-search">
         </div>
         <hr>
         <div class="custom-dropdown-items" id="dd-items">
