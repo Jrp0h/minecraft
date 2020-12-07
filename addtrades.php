@@ -1,7 +1,5 @@
 <?php
 
-// TODO: Collapseable divs
-
     include_once "./includes/validation.php";
     include_once "./includes/database.php";
     require_once "./includes/auth.php";
@@ -183,8 +181,9 @@
 
     <?php require('notifications.php'); ?>
 
+    <?php if(isset($_GET["type"]) && $_GET["type"] == "trade"): ?>
         <div class="container" id="inner-container">
-            <h2>Add Emerald Trades</h2>
+            <h2>Add Trades</h2>
             <p><b>Put in what trades your villagers have to offer.</b></p>
            <!-- Location --> 
             <form method="POST">
@@ -310,10 +309,12 @@
         </div>
     </div>
 
+    <?php elseif(isset($_GET["type"]) && $_GET["type"] == "enchantment"): ?>
+
     <div class="conatiner">
         <div class="container" id="inner-container">
             <h2>Add Enchantments</h2>
-            <p><b>Put in what enchantments your villagers have to offer</b></p>
+            <p><b>Put in what enchantments your villagers have to offer.</b></p>
             <form method="POST">
                 <div class="row">
                     <div class="col-lg-12">
@@ -374,6 +375,14 @@
                 </div>
             </form>
         </div>
+
+<?php else: ?>
+    <?php
+        Notification::danger("Invalid type");
+        header("Location: index.php");
+        die();
+    ?>
+<?php endif; ?>
 
     <!-- DONT TOUCH!!!!! -->
     <div id="dd" class="custom-dropdown">
