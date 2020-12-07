@@ -84,7 +84,7 @@
                     <div class="card-header bg-transparent border-dark">
                         <div class="row">
                             <div class="col-lg-6">
-                                <b><?php echo $e["name"]; ?></b>
+                                <b><?php echo htmlspecialchars($e["name"]); ?></b>
                             </div>
                         </div>
                     </div>
