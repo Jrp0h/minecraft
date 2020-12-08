@@ -93,7 +93,7 @@ $trades = $db->query("SELECT trades.*, trades.item_id AS first_item_id, trades.i
     <div id="accordion">
         <div class="container" id="inner-container">
             <div class="card-header" id="headingOne">
-                <div class="row" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <div class="row collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                     <div class="col-lg-6">
                         <h2>Enchantments <i class="fa fa-sort-down"></i></h2>
                     </div>
@@ -164,7 +164,7 @@ $trades = $db->query("SELECT trades.*, trades.item_id AS first_item_id, trades.i
 
         <div class="container" id="inner-container">
             <div class="card-header" id="headingTwo">
-                <div class="row" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                <div class="row collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <div class="col-lg-6">
                         <h2>Trades <i class="fa fa-sort-down"></i></h2>
                     </div>

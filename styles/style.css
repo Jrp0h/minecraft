@@ -239,3 +239,20 @@ h2 {
     padding-top: 0px;
     padding-bottom: 0px;
 }
+
+
+.collapsing {
+    transition: height .25s ease;
+}
+
+.fa-sort-down {
+    transition: transform .25s;
+}
+
+.row.collapsed .fa-sort-down {
+    transform: rotate(0deg);
+}
+
+.row .fa-sort-down {
+    transform: rotate(180deg);
+}
