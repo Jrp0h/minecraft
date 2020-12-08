@@ -70,108 +70,132 @@ if (isset($_POST["submit"])) {
 
     <!-- Container for all Content -->
     <div class="container" id="inner-container">
-        <div class="row">
-            <div class="col-lg-6">
-                <h2>Enchantments</h2>
-            </div>
-            <div class="col-lg-6 text-right">
-                <a href="/addtrades.php?type=enchantment" class="btn btn-light">Add Enchantment</a>
-            </div>
-        </div>
 
-        <div class="custom-grid">
 
-            <?php foreach ($enchantments as $e) : ?>
-                <div class="card border-dark card-coords" style="max-width: 100%;">
-                    <div class="card-header bg-transparent border-dark">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <b><?php echo htmlspecialchars($e["name"]); ?></b>
-                            </div>
+        <div id="accordion">
+            <div class="container" id="inner-container">
+                <div class="card-header" id="headingOne">
+                    <div class="row" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <div class="col-lg-6">
+                            <h2>Enchantments <i class="fa fa-sort-down"></i></h2>
+                        </div>
+                        <div class="col-lg-6 text-right">
+                            <a href="/addtrades.php?type=enchantment" class="btn btn-light">Add Enchantment</a>
                         </div>
                     </div>
-                    <div class="card-body text-dark">
-                        <div class="card-title">
-                            <div class="side-by-side">
-                                <div class="side-by-side">
-                                    <img src="/images/items/emerald.png" width="20" height="20">
-                                    <b style="margin-left: 0.5rem;"><?php echo $e["price"]; ?></b>
-                                </div>
-                                <p style="margin: 0px 0.5rem;">and</p>
-                                <div class="side-by-side">
-                                    <img src="/images/items/book.png" width="20" height="20">
-                                    <b style="margin-left: 0.5rem;">1</b>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-text">
-                            Located: <?php echo $e["poi_name"]; ?>
-                        </div>
-                    </div>
-                    <div class="card-footer bg-transparent border-dark">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <form method="POST" style="margin: 0px;">
-                                    <input type="submit" name="submit" class="btn btn-dark" value="Add to Cart">
-                                    <input type="hidden" name="id" value="<?php echo $e["id"]; ?>">
-                                </form>
+
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
+                            <div class="custom-grid">
+
+                                <?php foreach ($enchantments as $e) : ?>
+                                    <div class="card border-dark card-coords" style="max-width: 100%;">
+                                        <div class="card-header bg-transparent border-dark">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <b><?php echo htmlspecialchars($e["name"]); ?></b>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body text-dark">
+                                            <div class="card-title">
+                                                <div class="side-by-side">
+                                                    <div class="side-by-side">
+                                                        <img src="/images/items/emerald.png" width="20" height="20">
+                                                        <b style="margin-left: 0.5rem;"><?php echo $e["price"]; ?></b>
+                                                    </div>
+                                                    <p style="margin: 0px 0.5rem;">and</p>
+                                                    <div class="side-by-side">
+                                                        <img src="/images/items/book.png" width="20" height="20">
+                                                        <b style="margin-left: 0.5rem;">1</b>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-text">
+                                                Located: <?php echo $e["poi_name"]; ?>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer bg-transparent border-dark">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <form method="POST" style="margin: 0px;">
+                                                        <input type="submit" name="submit" class="btn btn-dark" value="Add to Cart">
+                                                        <input type="hidden" name="id" value="<?php echo $e["id"]; ?>">
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+
                             </div>
                         </div>
                     </div>
                 </div>
-            <?php endforeach; ?>
+            </div>
 
+
+            <div class="container" id="inner-container">
+                <div class="card-header" id="headingTwo">
+                    <div class="row" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                        <div class="col-lg-6">
+                            <h2>Trades <i class="fa fa-sort-down"></i></h2>
+                        </div>
+                        <div class="col-lg-6 text-right">
+                            <a href="/addtrades.php?type=trade" class="btn btn-light">Add Trade</a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div class="card-body">
+                        <div class="custom-grid">
+
+                            <!-- for test -->
+                            <?php foreach ($trades as $t) : ?>
+                                <div class="card border-dark card-coords" style="max-width: 100%;">
+                                    <div class="card-body text-dark">
+                                        <div class="side-by-side">
+                                            <p style="margin: 0px 0.5rem 0px 0px;">Give:</p>
+                                            <div class="side-by-side">
+                                                <img src="<?php echo $t["first_item_image_url"]; ?>" width="20" height="20">
+                                                <b style="margin-left: 0.5rem;"><?php echo $t["first_item_amount"]; ?></b>
+                                            </div>
+                                            <?php if ($t["secondary_item_id"] != null) : ?>
+                                                <p style="margin: 0px 0.5rem;">and</p>
+                                                <div class="side-by-side">
+                                                    <img src="<?php echo $t["secondary_item_image_url"] ?>" width="20" height="20">
+                                                    <b style="margin-left: 0.5rem;"><?php echo $t["secondary_item_amount"]; ?></b>
+                                                </div>
+                                            <?php endif; ?>
+                                        </div>
+                                        <div class="side-by-side">
+                                            <p style="margin: 0px 0.5rem 0px 0px;">Get:</p>
+                                            <div class="side-by-side">
+                                                <img src="<?php echo $t["return_item_image_url"]; ?>" width="20" height="20">
+                                                <b style="margin-left: 0.5rem;"><?php echo $t["return_item_amount"]; ?></b>
+                                            </div>
+                                        </div>
+                                        <div class="card-text">
+                                            Located: <?php echo htmlspecialchars($e["poi_name"]); ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
 
-    <div class="container" id="inner-container">
-        <!--Flöde Enchantments-->
-        <div class="row">
-            <div class="col-lg-6">
-                <h2>Trades</h2>
-            </div>
-            <div class="col-lg-6 text-right">
-                <a href="/addtrades.php?type=trade" class="btn btn-light">Add Trade</a>
-            </div>
-        </div>
+    <!--Flöde Enchantments-->
 
-        <div class="custom-grid">
 
-            <!-- for test -->
-            <?php foreach ($trades as $t) : ?>
-                <div class="card border-dark card-coords" style="max-width: 100%;">
-                    <div class="card-body text-dark">
-                        <div class="side-by-side">
-                            <p style="margin: 0px 0.5rem 0px 0px;">Give:</p>
-                            <div class="side-by-side">
-                                <img src="<?php echo $t["first_item_image_url"]; ?>" width="20" height="20">
-                                <b style="margin-left: 0.5rem;"><?php echo $t["first_item_amount"]; ?></b>
-                            </div>
-                            <?php if ($t["secondary_item_id"] != null) : ?>
-                                <p style="margin: 0px 0.5rem;">and</p>
-                                <div class="side-by-side">
-                                    <img src="<?php echo $t["secondary_item_image_url"] ?>" width="20" height="20">
-                                    <b style="margin-left: 0.5rem;"><?php echo $t["secondary_item_amount"]; ?></b>
-                                </div>
-                            <?php endif; ?>
-                        </div>
-                        <div class="side-by-side">
-                            <p style="margin: 0px 0.5rem 0px 0px;">Get:</p>
-                            <div class="side-by-side">
-                                <img src="<?php echo $t["return_item_image_url"]; ?>" width="20" height="20">
-                                <b style="margin-left: 0.5rem;"><?php echo $t["return_item_amount"]; ?></b>
-                            </div>
-                        </div>
-                        <div class="card-text">
-                            Located: <?php echo htmlspecialchars($e["poi_name"]); ?>
-                        </div>
-                    </div>
-                </div>
-            <?php endforeach; ?>
 
-        </div>
-    </div>
 
 
     <script src="scripts/main.js" async defer></script>
