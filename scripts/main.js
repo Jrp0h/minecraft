@@ -1,4 +1,4 @@
-//RAndom backgrounds
+//Random backgrounds
 var body = document.querySelector('body');
 
 

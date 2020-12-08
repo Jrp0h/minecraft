@@ -3,6 +3,7 @@ include_once "./includes/validation.php";
 include_once "./includes/database.php";
 require_once "./includes/auth.php";
 require_once "./includes/notification.php";
+require_once "./includes/cart.php";
 
 if (!Auth::isLoggedIn()) {
     Notification::warning("You must be logged in too look at trades");
@@ -11,6 +12,32 @@ if (!Auth::isLoggedIn()) {
 }
 
 $db = new Database();
+
+if (isset($_POST["submit"])) {
+    Cart::add($_POST["id"]);
+}
+
+if (isset($_POST["delete"])) {
+    if (isset($_POST["type"]) && $_POST["type"] == "enchantment") {
+        if (isset($_POST["id"])) {
+            $result = $db->query("SELECT user_id FROM enchantments WHERE id=:id", ["id" => $_POST["id"]]);
+            if (count($result) > 0) {
+                if (Auth::userId() == $result[0]["user_id"]) {
+                    $db->exec("DELETE FROM enchantments WHERE id = :id;", ["id" => $_POST["id"]]);
+                }
+            }
+        }
+    } else if (isset($_POST["type"]) && $_POST["type"] == "trade") {
+        if (isset($_POST["id"])) {
+            $result = $db->query("SELECT user_id FROM trades WHERE id=:id", ["id" => $_POST["id"]]);
+            if (count($result) > 0) {
+                if (Auth::userId() == $result[0]["user_id"]) {
+                    $db->exec("DELETE FROM trades WHERE id = :id;", ["id" => $_POST["id"]]);
+                }
+            }
+        }
+    }
+}
 $enchantments = $db->query("SELECT enchantments.*, points_of_interest.name AS poi_name FROM enchantments INNER JOIN points_of_interest ON enchantments.poi_id = points_of_interest.id");
 $trades = $db->query("SELECT trades.*, trades.item_id AS first_item_id, trades.item_amount AS first_item_amount, i1.name AS first_item_name, i1.image_url AS first_item_image_url, i2.name AS secondary_item_name, i2.image_url AS secondary_item_image_url, i3.name AS return_item_name, i3.image_url AS return_item_image_url, points_of_interest.name AS poi_name FROM trades LEFT JOIN items i1 ON trades.item_id = i1.id LEFT JOIN items i2 ON trades.secondary_item_id = i2.id LEFT JOIN items i3 ON trades.return_item_id = i3.id INNER JOIN points_of_interest ON trades.poi_id = points_of_interest.id;");
 ?>
@@ -65,24 +92,32 @@ $trades = $db->query("SELECT trades.*, trades.item_id AS first_item_id, trades.i
     <!-- Container for all Content -->
     <div class="container" id="inner-container">
         <div class="row">
-            <div class="col-lg-6">
-                <h2>Enchantments</h2>
+            <div class="col-sm-6">
+                <h2 class="mb-0">Enchantments</h2>
             </div>
-            <div class="col-lg-6 text-right">
-                <a href="/addtrades.php?type=enchantment" class="btn btn-light">Add Enchantment</a>
+            <div class="col-sm-6 text-right mb-2">
+                <a href="/addtrades.php?group=enchantment" class="btn btn-light">Add Enchantment</a>
             </div>
         </div>
 
         <div class="custom-grid">
 
-            <!-- for test -->
             <?php foreach ($enchantments as $e) : ?>
                 <div class="card border-dark card-coords" style="max-width: 100%;">
                     <div class="card-header bg-transparent border-dark">
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-sm-6">
                                 <b><?php echo htmlspecialchars($e["name"]); ?></b>
                             </div>
+                            <?php if (Auth::isLoggedIn() && Auth::userId() == $e["user_id"]) : ?>
+                                <div class="col-sm-6 text-right">
+                                    <form method="POST">
+                                        <input class="btn btn-danger pb-0 pt-0" value="Delete" type="submit" name="delete">
+                                        <input type="hidden" value="<?php echo $e["id"] ?>" name="id">
+                                        <input type="hidden" value="enchantment" name="type">
+                                    </form>
+                                </div>
+                            <?php endif; ?>
                         </div>
                     </div>
                     <div class="card-body text-dark">
@@ -123,11 +158,11 @@ $trades = $db->query("SELECT trades.*, trades.item_id AS first_item_id, trades.i
     <div class="container" id="inner-container">
         <!--Flöde Enchantments-->
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-sm-6">
                 <h2>Trades</h2>
             </div>
-            <div class="col-lg-6 text-right">
-                <a href="/addtrades.php?type=trade" class="btn btn-light">Add Trade</a>
+            <div class="col-sm-6 text-right">
+                <a href="/addtrades.php?group=trade" class="btn btn-light">Add Trade</a>
             </div>
         </div>
 
@@ -159,8 +194,15 @@ $trades = $db->query("SELECT trades.*, trades.item_id AS first_item_id, trades.i
                             </div>
                         </div>
                         <div class="card-text">
-                            Located: <?php echo htmlspecialchars($e["poi_name"]); ?>
+                            Located: <?php echo htmlspecialchars($t["poi_name"]); ?>
                         </div>
+                        <?php if (Auth::isLoggedIn() && Auth::userId() == $t["user_id"]) : ?>
+                            <form method="POST">
+                                <input class="btn btn-danger pb-0 pt-0" value="Delete" type="submit" name="delete">
+                                <input type="hidden" value="<?php echo $t["id"] ?>" name="id">
+                                <input type="hidden" value="trade" name="type">
+                            </form>
+                        <?php endif; ?>
                     </div>
                 </div>
             <?php endforeach; ?>

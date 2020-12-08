@@ -58,7 +58,7 @@ class Cart
         return $sum;
     }
 
-    static function returnAmount()
+    static function totalAmount()
     {
         self::$items = $_SESSION['shoppingcart'];
         $amount = 0;
@@ -66,5 +66,25 @@ class Cart
             $amount += $item;
         }
         return $amount;
+    }
+
+    static function returnAll()
+    {
+        self::$items = $_SESSION['shoppingcart'];
+        $db = new Database();
+
+        $data = [];
+
+        foreach (self::$items as $id => $amount) {
+            $temp = $db->query("SELECT en.*, poi.name AS poi_name FROM enchantments AS en INNER JOIN points_of_interest AS poi ON en.poi_id=poi.id WHERE en.id = :id", ["id" => $id]);
+            $temp[0]["amount"] = $amount;
+            $temp[0]["total_price"] = $amount * $temp[0]["price"];
+            $data[] = $temp[0];
+        }
+        return $data;
+    }
+    static function clear()
+    {
+        $_SESSION['shoppingcart'] = [];
     }
 }

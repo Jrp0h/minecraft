@@ -321,11 +321,11 @@ $result = $db->query($queries[$value], $params);
             <div class="card border-dark mb-3 card-coords" style="max-width: 100%;">
                 <div class="card-header bg-transparent border-dark">
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-sm-6">
                             <b><?php echo htmlspecialchars($row["name"]); ?></b>
                         </div>
                         <?php if (Auth::isLoggedIn() && Auth::userId() == $row["user_id"]) : ?>
-                            <div class="col-lg-6 text-right">
+                            <div class="col-sm-6 text-right">
                                 <a href="/coords.php?type=edit&id=<?php echo $row["id"] ?>" class="btn btn-dark">Edit</a>
                             </div>
                         <?php endif; ?>
