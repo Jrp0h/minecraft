@@ -145,10 +145,8 @@ $trades = $db->query("SELECT trades.*, trades.item_id AS first_item_id, trades.i
                                     <div class="card-footer bg-transparent border-dark">
                                         <div class="row">
                                             <div class="col-lg-12">
-                                                <form method="POST" style="margin: 0px;">
-                                                    <input type="submit" name="submit" class="btn btn-dark" value="Add to Cart">
-                                                    <input type="hidden" name="id" value="<?php echo $e["id"]; ?>">
-                                                </form>
+                                                <input type="submit" name="submit" class=" btn btn-dark" value="Add to Cart">
+                                                <input type="hidden" name="id" value="<?php echo $e["id"]; ?>">
                                             </div>
                                         </div>
                                     </div>

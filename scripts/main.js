@@ -138,3 +138,16 @@ for (let i = 0; i < customDropdowns.length; i++) {
         dropdownUI.classList.remove("hide");
     });
 }
+
+function addToCart(id) {
+    fetch("/addtocart.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        credentials: "same-origin",
+        body: JSON.stringify({
+            id
+        })
+    }).then(e => e.json()).then(data => console.log(data));
+}
