@@ -1,16 +1,4 @@
 <?php
-<<<<<<< HEAD
-include_once "./includes/validation.php";
-include_once "./includes/database.php";
-require_once "./includes/auth.php";
-require_once "./includes/notification.php";
-
-if (!Auth::isLoggedIn()) {
-    Notification::warning("You must be logged in too look at trades");
-    header("Location: login.php");
-    die();
-}
-=======
     include_once "./includes/validation.php";
     include_once "./includes/database.php";
     require_once "./includes/auth.php";
@@ -25,7 +13,6 @@ if (!Auth::isLoggedIn()) {
     $db = new Database();
     $enchantments = $db->query("SELECT enchantments.*, points_of_interest.name AS poi_name FROM enchantments INNER JOIN points_of_interest ON enchantments.poi_id = points_of_interest.id");
     $trades = $db->query("SELECT trades.*, trades.item_id AS first_item_id, trades.item_amount AS first_item_amount, i1.name AS first_item_name, i1.image_url AS first_item_image_url, i2.name AS secondary_item_name, i2.image_url AS secondary_item_image_url, i3.name AS return_item_name, i3.image_url AS return_item_image_url, points_of_interest.name AS poi_name FROM trades LEFT JOIN items i1 ON trades.item_id = i1.id LEFT JOIN items i2 ON trades.secondary_item_id = i2.id LEFT JOIN items i3 ON trades.return_item_id = i3.id INNER JOIN points_of_interest ON trades.poi_id = points_of_interest.id;");
->>>>>>> cbfedd48eeff1bfc6ad162f0a867ea01e50cd4ff
 ?>
 
 <!DOCTYPE html>
@@ -88,13 +75,7 @@ if (!Auth::isLoggedIn()) {
 
         <div class="custom-grid">
 
-<<<<<<< HEAD
-            <!-- for test -->
-            <?php for ($i = 0; $i < 10; $i++) : ?>
-=======
-<!-- for test -->
             <?php foreach($enchantments as $e): ?>
->>>>>>> cbfedd48eeff1bfc6ad162f0a867ea01e50cd4ff
                 <div class="card border-dark card-coords" style="max-width: 100%;">
                     <div class="card-header bg-transparent border-dark">
                         <div class="row">
@@ -124,15 +105,9 @@ if (!Auth::isLoggedIn()) {
                     <div class="card-footer bg-transparent border-dark">
                         <div class="row">
                             <div class="col-lg-12">
-<<<<<<< HEAD
-                                <form method="POST">
-                                    <input type="submit" name="addCart" class="btn btn-dark" value="Add to Cart" id="btnAddCart">
-                                    <input type="hidden" name="id" value="1">
-=======
                                 <form method="POST" style="margin: 0px;">
                                     <input type="submit" name="submit" class="btn btn-dark" value="Add to Cart">
                                     <input type="hidden" name="id" value="<?php echo $e["id"]; ?>">
->>>>>>> cbfedd48eeff1bfc6ad162f0a867ea01e50cd4ff
                                 </form>
                             </div>
                         </div>
