@@ -9,9 +9,7 @@ function randomBackground() {
 
 randomBackground();
 
-//Shoppingcart Button
 
-var btnAddCart = document.querySelector('#btnAddCart')
 
 // Remove notifications
 function removeNotification() {

@@ -7,6 +7,7 @@ if (!isset($_SESSION['shoppingcart'])) {
     $_SESSION['shoppingcart'] = [];
 }
 
+
 require_once "./includes/database.php";
 
 
