@@ -81,7 +81,6 @@ if (isset($_POST["submit"])) {
 
         <div class="custom-grid">
 
-            <!-- for test -->
             <?php foreach ($enchantments as $e) : ?>
                 <div class="card border-dark card-coords" style="max-width: 100%;">
                     <div class="card-header bg-transparent border-dark">
@@ -165,7 +164,7 @@ if (isset($_POST["submit"])) {
                             </div>
                         </div>
                         <div class="card-text">
-                            Located: <?php echo $e["poi_name"]; ?>
+                            Located: <?php echo htmlspecialchars($e["poi_name"]); ?>
                         </div>
                     </div>
                 </div>
