@@ -159,7 +159,7 @@ $trades = $db->query("SELECT trades.*, trades.item_id AS first_item_id, trades.i
                             </div>
                         </div>
                         <div class="card-text">
-                            Located: <?php echo $e["poi_name"]; ?>
+                            Located: <?php echo htmlspecialchars($e["poi_name"]); ?>
                         </div>
                     </div>
                 </div>

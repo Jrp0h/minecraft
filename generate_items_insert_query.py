@@ -2,8 +2,8 @@
 from os import listdir
 from os.path import isfile, join
 
-images = [f for f in listdir("./images/items")
-          if isfile(join("./images/items", f))]
+images = [f for f in listdir("./images/blocks")
+          if isfile(join("./images/blocks", f))]
 
 query = "INSERT INTO items (name, image_url) VALUES"
 
@@ -24,7 +24,7 @@ for image in images:
         else:
             name = name + c
 
-    query = query + " ('" + name + "', '" + "/images/items/" + image + "'),"
+    query = query + " ('" + name + "', '" + "/images/blocks/" + image + "'),"
 
 query = query[:-1] + ";"
 
