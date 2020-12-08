@@ -21,18 +21,18 @@
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="navbar-nav ml-auto text-right">
                 <li class="nav-item"><a class="nav-link" href="index.php">Home / </a></li>
-                <li class="nav-item"><a class="nav-link" href="trades.php">Trades / </a></li>
                 <li class="nav-item"><a class="nav-link" href="calculator.php">Calculator / </a></li>
                 <?php if (!Auth::isLoggedIn()) : ?>
                     <li class="nav-item"><a class="nav-link" href="register.php">Register /</a></li>
                     <li class="nav-item"><a class="nav-link" href="login.php">Log in / </a></li>
                 <?php else : ?>
+                    <li class="nav-item"><a class="nav-link" href="trades.php">Trades / </a></li>
                     <li class="nav-item"><a class="nav-link" href="coords.php">add Coords / </a></li>
                     <li class="nav-item"><a class="nav-link" href="signout.php">Sign Out / </a></li>
                     <li class="nav-item">
                         <a class="btn btn-light btn-sm mt-1 btn-nav" href="shoppingcart.php">
                             <i class="fa fa-shopping-cart"></i>
-                            <span class="badge badge-light defualtFont"><?php echo Cart::totalAmount() ?></span>
+                            <span class="badge badge-light defualtFont" id="cart_amount"><?php echo Cart::totalAmount() ?></span>
                         </a>
                     </li>
                 <?php endif; ?>

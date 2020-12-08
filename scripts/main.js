@@ -140,14 +140,21 @@ for (let i = 0; i < customDropdowns.length; i++) {
 }
 
 function addToCart(id) {
+    console.log(id);
     fetch("/addtocart.php", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
         credentials: "same-origin",
-        body: JSON.stringify({
-            id
-        })
-    }).then(e => e.json()).then(data => console.log(data));
+        body: JSON.stringify({id: id})
+
+    })
+        .then(e => e.json())
+        .then(data => {
+            if (data.message != undefined)
+                return;
+
+            document.querySelector("#cart_amount").innerText = data.amount;
+        });
 }
