@@ -105,8 +105,6 @@ if (isset($_POST["submit"])) {
     } else {
         $defaultValues["name"] = $_POST["name"];
     }
-    $defaultValues["looted"] = $_POST["looted"];
-
 
     if (count($errors) <= 0) {
         $db = new Database();

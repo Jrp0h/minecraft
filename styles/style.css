@@ -14,6 +14,10 @@
     src: url('/fonts/Squarified.ttf') format('truetype')
 }
 
+.defualtFont {
+    font-family: defaultText;
+}
+
 /* Fix reading text */
 .fontFix {
     font-size: 22px;
@@ -98,7 +102,7 @@ h2 {
 
 .notification p {
     padding: 0px;
-    margin:0px;
+    margin: 0px;
 }
 
 .notification i {
@@ -106,12 +110,12 @@ h2 {
 }
 
 .notification-info {
-    background-color: rgba(193, 229, 236 ,0.75);
+    background-color: rgba(193, 229, 236, 0.75);
     color: #0C5460;
 }
 
 .notification-success {
-    background-color: rgba(197, 231, 205 ,0.75);
+    background-color: rgba(197, 231, 205, 0.75);
     color: #155724;
 }
 
@@ -136,7 +140,7 @@ h2 {
     position: absolute;
     top: 50%;
     left: 50%;
-    
+
     /* transform: translate(-50%, -50%); */
 }
 
@@ -162,7 +166,7 @@ h2 {
     display: flex;
     align-items: center;
     padding: 0.5rem;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .custom-dropdown-item-group:hover {
@@ -210,7 +214,8 @@ h2 {
         width: 100%;
         padding: 1rem;
         margin-top: 0px;
-        min-height: calc(100vh - 56px); /* 56px is the navbars height */
+        min-height: calc(100vh - 56px);
+        /* 56px is the navbars height */
     }
 
     .notification {
@@ -230,7 +235,7 @@ h2 {
 .notification-hide {
     transition: all ease-in-out 1s;
     height: 0px;
-    color: rgba(0,0,0,0.0);
+    color: rgba(0, 0, 0, 0.0);
     padding-top: 0px;
     padding-bottom: 0px;
 }

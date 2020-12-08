@@ -1,4 +1,4 @@
-//RAndom backgrounds
+//Random backgrounds
 var body = document.querySelector('body');
 
 
@@ -11,7 +11,8 @@ randomBackground();
 
 //Shoppingcart Button
 
-var btnAddCart = document.querySelector('#btnAddCart')
+var btnAddToCart = document.querySelector('#addToCart')
+
 
 // Remove notifications
 function removeNotification() {

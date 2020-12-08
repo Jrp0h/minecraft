@@ -3,6 +3,7 @@
         session_start();
     }
     require_once "./includes/auth.php";
+    require_once "./includes/cart.php";
 
     ?>
     <!-----------Navbar------------>
@@ -31,7 +32,7 @@
                     <li class="nav-item">
                         <a class="btn btn-light btn-sm mt-1 btn-nav" href="shoppingcart.php">
                             <i class="fa fa-shopping-cart"></i>
-                            <span class="badge badge-light">8</span>
+                            <span class="badge badge-light defualtFont"><?php echo Cart::totalAmount() ?></span>
                         </a>
                     </li>
                 <?php endif; ?>
