@@ -92,12 +92,12 @@ $trades = $db->query("SELECT trades.*, trades.item_id AS first_item_id, trades.i
     <!-- Container for all Content -->
     <div id="accordion">
         <div class="container" id="inner-container">
-            <div class="card-header" id="headingOne">
+            <div id="headingOne">
                 <div class="row collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    <div class="col-lg-6">
+                    <div class="col-sm-6">
                         <h2>Enchantments <i class="fa fa-sort-down"></i></h2>
                     </div>
-                    <div class="col-lg-6 text-right">
+                    <div class="col-sm-6 text-right">
                         <a href="/addtrades.php?group=enchantment" class="btn btn-light">Add Enchantment</a>
                     </div>
                 </div>
@@ -110,7 +110,7 @@ $trades = $db->query("SELECT trades.*, trades.item_id AS first_item_id, trades.i
                                 <div class="card border-dark card-coords" style="max-width: 100%;">
                                     <div class="card-header bg-transparent border-dark">
                                         <div class="row">
-                                            <div class="col-lg-8">
+                                            <div class="col-sm-8">
                                                 <b><?php echo htmlspecialchars($e["name"]); ?></b>
                                             </div>
                                             <?php if (Auth::isLoggedIn() && Auth::userId() == $e["user_id"]) : ?>
@@ -139,14 +139,13 @@ $trades = $db->query("SELECT trades.*, trades.item_id AS first_item_id, trades.i
                                             </div>
                                         </div>
                                         <div class="card-text">
-                                            Located: <?php echo $e["poi_name"]; ?>
+                                            Located: <a href="/poi.php?id=<?php echo $e["poi_id"]; ?>"><?php echo htmlspecialchars($e["poi_name"]); ?></a>
                                         </div>
                                     </div>
                                     <div class="card-footer bg-transparent border-dark">
                                         <div class="row">
                                             <div class="col-lg-12">
-                                                <input type="submit" name="submit" class=" btn btn-dark" value="Add to Cart">
-                                                <input type="hidden" name="id" value="<?php echo $e["id"]; ?>">
+                                                <button class="btn btn-dark" onclick="addToCart(<?php echo $e['id']; ?>)">Add to Cart</button>
                                             </div>
                                         </div>
                                     </div>
@@ -161,12 +160,12 @@ $trades = $db->query("SELECT trades.*, trades.item_id AS first_item_id, trades.i
 
 
         <div class="container" id="inner-container">
-            <div class="card-header" id="headingTwo">
+            <div id="headingTwo">
                 <div class="row collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                    <div class="col-lg-6">
+                    <div class="col-sm-6">
                         <h2>Trades <i class="fa fa-sort-down"></i></h2>
                     </div>
-                    <div class="col-lg-6 text-right">
+                    <div class="col-sm-6 text-right">
                         <a href="/addtrades.php?group=trade" class="btn btn-light">Add Trade</a>
                     </div>
                 </div>
@@ -202,7 +201,7 @@ $trades = $db->query("SELECT trades.*, trades.item_id AS first_item_id, trades.i
                                         </div>
                                     </div>
                                     <div class="card-text">
-                                        Located: <?php echo htmlspecialchars($e["poi_name"]); ?>
+                                            Located: <a href="/poi.php?id=<?php echo $t["poi_id"]; ?>"><?php echo htmlspecialchars($t["poi_name"]); ?></a>
                                     </div>
                                     <?php if (Auth::isLoggedIn() && Auth::userId() == $t["user_id"]) : ?>
                                         <form method="POST">

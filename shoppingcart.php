@@ -93,7 +93,7 @@ if (isset($_POST["clear"])) {
                                 <p><?php echo $item["total_price"] ?></p>
                             </div>
                         </td>
-                        <td><?php echo $item["poi_name"] ?></td>
+                        <td> <a href="/poi.php?id=<?php echo $item["poi_id"]; ?>"><?php echo $item["poi_name"] ?></a></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

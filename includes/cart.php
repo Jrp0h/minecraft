@@ -3,9 +3,6 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-if (!isset($_SESSION['shoppingcart'])) {
-    $_SESSION['shoppingcart'] = [];
-}
 
 
 require_once "./includes/database.php";
@@ -18,6 +15,10 @@ class Cart
 
     static function add($id)
     {
+        if (!isset($_SESSION['shoppingcart'])) {
+            $_SESSION['shoppingcart'] = [];
+        }
+
         self::$items = $_SESSION['shoppingcart'];
 
         if (isset(self::$items[$id]))
@@ -30,6 +31,10 @@ class Cart
 
     static function remove($id)
     {
+        if (!isset($_SESSION['shoppingcart'])) {
+            $_SESSION['shoppingcart'] = [];
+        }
+
         self::$items = $_SESSION['shoppingcart'];
         if (isset(self::$items[$id]) && self::$items[$id] > 1) {
             self::$items[$id]--;
@@ -47,6 +52,10 @@ class Cart
 
     static function returnPrice()
     {
+        if (!isset($_SESSION['shoppingcart'])) {
+            $_SESSION['shoppingcart'] = [];
+        }
+
         self::$items = $_SESSION['shoppingcart'];
         $db = new Database();
         $sum = 0;
@@ -60,6 +69,10 @@ class Cart
 
     static function totalAmount()
     {
+        if (!isset($_SESSION['shoppingcart'])) {
+            $_SESSION['shoppingcart'] = [];
+        }
+
         self::$items = $_SESSION['shoppingcart'];
         $amount = 0;
         foreach (self::$items as $key => $item) {
@@ -70,6 +83,10 @@ class Cart
 
     static function returnAll()
     {
+        if (!isset($_SESSION['shoppingcart'])) {
+            $_SESSION['shoppingcart'] = [];
+        }
+
         self::$items = $_SESSION['shoppingcart'];
         $db = new Database();
 
