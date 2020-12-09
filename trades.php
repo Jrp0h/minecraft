@@ -139,7 +139,7 @@ $trades = $db->query("SELECT trades.*, trades.item_id AS first_item_id, trades.i
                                             </div>
                                         </div>
                                         <div class="card-text">
-                                            Located: <?php echo $e["poi_name"]; ?>
+                                            Located: <a href="/poi.php?id=<?php echo $e["poi_id"]; ?>"><?php echo htmlspecialchars($e["poi_name"]); ?></a>
                                         </div>
                                     </div>
                                     <div class="card-footer bg-transparent border-dark">
@@ -201,7 +201,7 @@ $trades = $db->query("SELECT trades.*, trades.item_id AS first_item_id, trades.i
                                         </div>
                                     </div>
                                     <div class="card-text">
-                                        Located: <?php echo htmlspecialchars($e["poi_name"]); ?>
+                                            Located: <a href="/poi.php?id=<?php echo $t["poi_id"]; ?>"><?php echo htmlspecialchars($t["poi_name"]); ?></a>
                                     </div>
                                     <?php if (Auth::isLoggedIn() && Auth::userId() == $t["user_id"]) : ?>
                                         <form method="POST">
