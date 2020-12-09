@@ -83,7 +83,7 @@ $queries = [
 
 
 $worlds = ["Overworld", "Nether", "End"];
-$categories = ["Home", "Biome", "Temple", "Spawner", "Misc"];
+$categories = ["Home", "Spawner", "Farm", "Village", "Stronghold", "Desert Temple", "Jungle Temple", "Guardian Tempel", "Ocean Ruins", "Mineshaft", "Pillager Outpost", "Shipwreck", "Biome", "End Portal", "Nether Portal", "Bastion",  "Nether Fortress", "Mansion", "Mushroom Island", "Misc"];
 
 $value = 0;
 $errors = [];
